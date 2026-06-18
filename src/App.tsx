@@ -14,6 +14,7 @@ function App() {
     <div className="min-h-screen bg-mono-bg text-mono-text font-body pb-24 lg:pb-0 relative overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col">
         <Header 
+          currentPage={currentPage}
           setCurrentPage={setCurrentPage} 
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}

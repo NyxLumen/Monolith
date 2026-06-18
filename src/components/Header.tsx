@@ -2,12 +2,13 @@ import { Search, ShoppingCart, Menu } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 interface HeaderProps {
+  currentPage: 'home' | 'cart';
   setCurrentPage: (page: 'home' | 'cart') => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 }
 
-export default function Header({ setCurrentPage, searchQuery, setSearchQuery }: HeaderProps) {
+export default function Header({ currentPage, setCurrentPage, searchQuery, setSearchQuery }: HeaderProps) {
   const { cartItems } = useCart();
 
   return (
@@ -38,16 +39,17 @@ export default function Header({ setCurrentPage, searchQuery, setSearchQuery }: 
       <nav className="hidden lg:flex flex-1 justify-center items-center gap-12">
         <button 
           onClick={() => setCurrentPage('home')} 
-          className="text-sm font-bold text-mono-text hover:text-mono-muted transition-colors"
+          className="text-sm font-bold text-mono-text hover:text-mono-muted transition-colors relative"
         >
           Home
+          {currentPage === 'home' && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
         </button>
         <button 
           onClick={() => setCurrentPage('cart')} 
           className="text-sm font-bold text-mono-text hover:text-mono-muted transition-colors relative"
         >
           Shop
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>
+          {currentPage === 'cart' && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
         </button>
         <a href="#" className="text-sm font-bold text-mono-text hover:text-mono-muted transition-colors">About</a>
       </nav>
