@@ -3,12 +3,12 @@ import { ArrowRight } from 'lucide-react';
 export default function Hero() {
   return (
     <section className="px-6 lg:px-12 py-4 lg:py-8">
-      <div className="relative w-full h-[400px] lg:h-[480px] rounded-[2rem] shadow-neo-inset-sm overflow-hidden flex items-center bg-mono-bg">
-        {/* Background image matching the layout - we'll position it so the image is on the right */}
-        <div 
-          className="absolute inset-0 bg-cover bg-no-repeat bg-right lg:bg-[center_right_-4rem] opacity-90" 
-          style={{ backgroundImage: 'url(/hero.png)' }}
-        ></div>
+      <div 
+        className="relative w-full h-[400px] lg:h-[480px] rounded-[2rem] overflow-hidden flex items-center bg-mono-bg bg-cover bg-center"
+        style={{ backgroundImage: 'url(/hero.png)' }}
+      >
+        {/* Shadow overlay to ensure inset shadow renders ON TOP of the background image */}
+        <div className="absolute inset-0 rounded-[2rem] shadow-neo-inset-sm pointer-events-none z-20"></div>
         
         {/* Content Overlay */}
         <div className="relative z-10 px-8 lg:px-16 max-w-2xl mt-[-4rem] lg:mt-0">
@@ -26,7 +26,7 @@ export default function Hero() {
         </div>
 
         {/* Carousel indicators for mobile as shown in design */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 lg:hidden">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 lg:hidden z-10">
           <div className="w-2 h-2 rounded-full bg-mono-text"></div>
           <div className="w-2 h-2 rounded-full bg-mono-text/20"></div>
           <div className="w-2 h-2 rounded-full bg-mono-text/20"></div>
