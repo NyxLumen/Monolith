@@ -3,10 +3,11 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import FeaturedProducts from './components/FeaturedProducts';
 import Cart from './components/Cart';
+import About from './components/About';
 import { useCart } from './context/CartContext';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'cart'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'cart' | 'about'>('home');
   const [searchQuery, setSearchQuery] = useState('');
   const { cartItems } = useCart();
 
@@ -20,15 +21,15 @@ function App() {
           setSearchQuery={setSearchQuery}
         />
         
-        <main className="flex-1 w-full">
-          {currentPage === 'home' ? (
+        <main className="flex-1 w-full flex flex-col items-center">
+          {currentPage === 'home' && (
             <>
               <Hero />
               <FeaturedProducts searchQuery={searchQuery} />
             </>
-          ) : (
-            <Cart />
           )}
+          {currentPage === 'cart' && <Cart />}
+          {currentPage === 'about' && <About />}
         </main>
 
         <footer className="w-full py-8 lg:py-12 flex justify-center items-center">
@@ -43,10 +44,11 @@ function App() {
         <nav className="flex items-center gap-2 bg-mono-bg px-2 py-2 rounded-full shadow-neo border border-white/30">
           <button 
             onClick={() => setCurrentPage('home')}
-            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-full transition-all text-[0.65rem] font-bold ${currentPage === 'home' ? 'bg-mono-bg shadow-neo-inset text-mono-text' : 'hover:bg-mono-bg hover:shadow-neo-inset text-mono-muted font-medium'}`}
+            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-full transition-all text-[0.65rem] font-bold relative ${currentPage === 'home' ? 'bg-mono-bg shadow-neo-inset text-mono-text' : 'hover:bg-mono-bg hover:shadow-neo-inset text-mono-muted font-medium'}`}
           >
             <span className="w-5 h-5 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
             Home
+            {currentPage === 'home' && <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
           </button>
           <button 
             onClick={() => setCurrentPage('cart')}
@@ -64,9 +66,13 @@ function App() {
             Cart
             {currentPage === 'cart' && <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
           </button>
-          <button className="flex flex-col items-center gap-1 px-4 py-2 rounded-full hover:bg-mono-bg hover:shadow-neo-inset transition-all text-[0.65rem] font-medium text-mono-muted">
+          <button 
+            onClick={() => setCurrentPage('about')}
+            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-full transition-all text-[0.65rem] font-bold relative ${currentPage === 'about' ? 'bg-mono-bg shadow-neo-inset text-mono-text' : 'hover:bg-mono-bg hover:shadow-neo-inset text-mono-muted font-medium'}`}
+          >
             <span className="w-5 h-5 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
             About
+            {currentPage === 'about' && <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
           </button>
         </nav>
       </div>
