@@ -7,18 +7,23 @@ import { useCart } from './context/CartContext';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'cart'>('home');
+  const [searchQuery, setSearchQuery] = useState('');
   const { cartItems } = useCart();
 
   return (
     <div className="min-h-screen bg-mono-bg text-mono-text font-body pb-24 lg:pb-0 relative overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col">
-        <Header setCurrentPage={setCurrentPage} />
+        <Header 
+          setCurrentPage={setCurrentPage} 
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
         
         <main className="flex-1 w-full">
           {currentPage === 'home' ? (
             <>
               <Hero />
-              <FeaturedProducts />
+              <FeaturedProducts searchQuery={searchQuery} />
             </>
           ) : (
             <Cart />

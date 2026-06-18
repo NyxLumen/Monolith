@@ -8,28 +8,47 @@ interface Product {
   thumbnail: string;
 }
 
-export default function FeaturedProducts() {
+interface FeaturedProductsProps {
+  searchQuery?: string;
+}
+
+export default function FeaturedProducts({ searchQuery = '' }: FeaturedProductsProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch a curated list of minimalist items (watches, shoes, sunglasses)
-    Promise.all([
-      fetch('https://dummyjson.com/products/category/mens-watches?limit=4').then(res => res.json()),
-      fetch('https://dummyjson.com/products/category/mens-shoes?limit=4').then(res => res.json()),
-      fetch('https://dummyjson.com/products/category/sunglasses?limit=4').then(res => res.json())
-    ])
-      .then(([watches, shoes, glasses]) => {
-        // Combine the results into a single array of 12 items
-        const combined = [...watches.products, ...shoes.products, ...glasses.products];
-        setProducts(combined);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch products", error);
-        setLoading(false);
-      });
-  }, []);
+    setLoading(true);
+
+    if (searchQuery.trim().length > 0) {
+      // Dynamic Search
+      fetch(`https://dummyjson.com/products/search?q=${encodeURIComponent(searchQuery)}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProducts(data.products);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Failed to search products", error);
+          setLoading(false);
+        });
+    } else {
+      // Default curated list
+      Promise.all([
+        fetch('https://dummyjson.com/products/category/mens-watches?limit=4').then(res => res.json()),
+        fetch('https://dummyjson.com/products/category/mens-shoes?limit=4').then(res => res.json()),
+        fetch('https://dummyjson.com/products/category/sunglasses?limit=4').then(res => res.json())
+      ])
+        .then(([watches, shoes, glasses]) => {
+          const combined = [...watches.products, ...shoes.products, ...glasses.products];
+          setProducts(combined);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch products", error);
+          setLoading(false);
+        });
+    }
+  }, [searchQuery]);
 
   return (
     <section className="px-6 lg:px-12 py-8 lg:py-12">

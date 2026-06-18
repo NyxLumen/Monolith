@@ -3,9 +3,11 @@ import { useCart } from '../context/CartContext';
 
 interface HeaderProps {
   setCurrentPage: (page: 'home' | 'cart') => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 }
 
-export default function Header({ setCurrentPage }: HeaderProps) {
+export default function Header({ setCurrentPage, searchQuery, setSearchQuery }: HeaderProps) {
   const { cartItems } = useCart();
 
   return (
@@ -59,6 +61,8 @@ export default function Header({ setCurrentPage }: HeaderProps) {
             type="text" 
             placeholder="Search products..." 
             className="bg-transparent border-none outline-none text-xs font-medium w-full text-mono-text placeholder:text-mono-muted"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         
