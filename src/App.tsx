@@ -21,7 +21,7 @@ function App() {
           setSearchQuery={setSearchQuery}
         />
         
-        <main className="flex-1 w-full flex flex-col items-center">
+        <main className="flex-1 w-full">
           {currentPage === 'home' && (
             <>
               <Hero />

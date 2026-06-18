@@ -8,7 +8,7 @@ export default function About() {
       <div className="bg-mono-bg rounded-[2rem] shadow-neo-sm flex flex-col lg:flex-row p-4 lg:p-6 gap-6">
         
         {/* Left Content */}
-        <div className="flex-1 flex flex-col justify-center items-start px-4 py-8 lg:px-12 lg:py-16">
+        <div className="lg:w-[40%] flex flex-col justify-center items-start px-4 py-8 lg:px-12 lg:py-16">
           <span className="text-[0.65rem] tracking-[0.2em] font-bold text-mono-muted uppercase mb-6">
             About Monolith
           </span>
@@ -24,7 +24,7 @@ export default function About() {
         </div>
 
         {/* Right Image Container */}
-        <div className="flex-1 relative rounded-3xl overflow-hidden shadow-neo-inset-sm bg-mono-bg min-h-[300px] lg:min-h-[500px]">
+        <div className="lg:w-[60%] relative rounded-3xl overflow-hidden shadow-neo-inset-sm bg-mono-bg min-h-[300px] lg:min-h-[500px]">
           <img 
             src="/banner.png" 
             alt="Minimalist Essentials" 
