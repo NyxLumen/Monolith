@@ -1,21 +1,36 @@
+import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 
-const products = [
-  { name: 'Aero Backpack', price: '$129.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Backpack' },
-  { name: 'Nova Headphones', price: '$149.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Headphones' },
-  { name: 'Chrono Watch', price: '$199.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Watch' },
-  { name: 'Trail Sneakers', price: '$99.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Sneakers' },
-  { name: 'Vibe Sunglasses', price: '$59.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Sunglasses' },
-  { name: 'Orbit Camera', price: '$249.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Camera' },
-  { name: 'Horizon Jacket', price: '$129.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Jacket' },
-  { name: 'Tech Pouch', price: '$39.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Pouch' },
-  { name: 'Classic Cap', price: '$29.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Cap' },
-  { name: 'Leather Wallet', price: '$49.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Wallet' },
-  { name: 'Insulated Bottle', price: '$35.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Bottle' },
-  { name: 'Canvas Tote', price: '$45.00', imageUrl: 'https://placehold.co/400x400/F4F4F6/8A8A8E?text=Tote' },
-];
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+}
 
 export default function FeaturedProducts() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch a curated list of minimalist items (watches, shoes, sunglasses)
+    Promise.all([
+      fetch('https://dummyjson.com/products/category/mens-watches?limit=4').then(res => res.json()),
+      fetch('https://dummyjson.com/products/category/mens-shoes?limit=4').then(res => res.json()),
+      fetch('https://dummyjson.com/products/category/sunglasses?limit=4').then(res => res.json())
+    ])
+      .then(([watches, shoes, glasses]) => {
+        // Combine the results into a single array of 12 items
+        const combined = [...watches.products, ...shoes.products, ...glasses.products];
+        setProducts(combined);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch products", error);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <section className="px-6 lg:px-12 py-8 lg:py-12">
       <div className="flex justify-between items-center mb-6 lg:mb-8">
@@ -25,16 +40,22 @@ export default function FeaturedProducts() {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
-        {products.map((product) => (
-          <ProductCard
-            key={product.name}
-            name={product.name}
-            price={product.price}
-            imageUrl={product.imageUrl}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <div className="flex justify-center items-center py-12">
+          <div className="w-8 h-8 rounded-full border-4 border-mono-muted border-t-mono-text animate-spin"></div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              name={product.title}
+              price={`₹${(product.price * 83).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`}
+              imageUrl={product.thumbnail}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
