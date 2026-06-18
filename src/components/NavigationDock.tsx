@@ -62,13 +62,13 @@ export const NavigationDock: React.FC<NavigationDockProps> = ({
               )}
 
               <Icon className={`w-4 h-4 transition-transform ${isActive ? 'scale-110 text-slate-900' : 'text-slate-400'}`} />
-              <span className="text-[8px] tracking-wider mt-1 select-none uppercase font-semibold">
+              <span className="text-[8px] tracking-wider mt-1 select-none font-semibold">
                 {item.label}
               </span>
 
               {/* Badge Counter */}
               {item.badge !== undefined && item.badge > 0 && (
-                <span className="absolute -top-1 -right-1 bg-slate-950 text-white font-mono font-bold text-[8px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm border border-white">
+                <span className="absolute -top-1 -right-1 bg-[#FD4912] text-white font-mono font-bold text-[8px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm border border-white">
                   {item.badge}
                 </span>
               )}

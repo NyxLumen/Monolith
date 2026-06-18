@@ -54,7 +54,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack 
           <img 
             src={product.image} 
             alt={product.title} 
-            className="max-h-[90%] max-w-[90%] object-contain select-none"
+            className="max-h-[90%] max-w-[90%] object-contain blend-multiply-desaturate select-none"
             draggable={false}
           />
         </div>

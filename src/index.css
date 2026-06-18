@@ -19,8 +19,8 @@
   
   .shadow-raised {
     --nm-shadow-distance: 8px;
-    --nm-shadow-blur: 20px;
-    --nm-shadow-color: rgba(163, 177, 198, 0.35);
+    --nm-shadow-blur: 24px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.16);
     --nm-shadow-highlight-color: rgba(255, 255, 255, 0.95);
     --nm-shadow-light-source: 315deg;
 
@@ -34,8 +34,8 @@
   
   .shadow-recessed {
     --nm-shadow-distance: 6px;
-    --nm-shadow-blur: 16px;
-    --nm-shadow-color: rgba(163, 177, 198, 0.3);
+    --nm-shadow-blur: 18px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.14);
     --nm-shadow-highlight-color: rgba(255, 255, 255, 0.9);
     --nm-shadow-light-source: 315deg;
 
@@ -49,8 +49,8 @@
   
   .shadow-key-raised {
     --nm-shadow-distance: 4px;
-    --nm-shadow-blur: 10px;
-    --nm-shadow-color: rgba(163, 177, 198, 0.25);
+    --nm-shadow-blur: 12px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.12);
     --nm-shadow-highlight-color: rgba(255, 255, 255, 0.95);
     --nm-shadow-light-source: 315deg;
 
@@ -64,8 +64,8 @@
   
   .shadow-key-recessed {
     --nm-shadow-distance: 4px;
-    --nm-shadow-blur: 10px;
-    --nm-shadow-color: rgba(163, 177, 198, 0.25);
+    --nm-shadow-blur: 12px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.12);
     --nm-shadow-highlight-color: rgba(255, 255, 255, 0.9);
     --nm-shadow-light-source: 315deg;
 

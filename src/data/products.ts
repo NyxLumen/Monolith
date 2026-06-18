@@ -16,7 +16,7 @@ export const products: Product[] = [
     price: 149.00,
     description: 'Active noise-cancelling headphones featuring crisp acoustic architecture and plush ear cushions for prolonged listening comfort.',
     category: 'audio',
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=600',
     rating: { rate: 4.9, count: 320 }
   },
   {
@@ -25,7 +25,7 @@ export const products: Product[] = [
     price: 199.00,
     description: 'Precision mechanical timekeeper with a matte black chassis and solid link bracelet. Water-resistant, timeless design.',
     category: 'accessories',
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&q=80&w=600',
     rating: { rate: 4.7, count: 98 }
   },
   {
@@ -34,7 +34,7 @@ export const products: Product[] = [
     price: 99.00,
     description: 'Lightweight technical sneakers with engineered mesh ventilation, springy foam cushioning, and high-traction rubber outsoles.',
     category: 'footwear',
-    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&q=80&w=600',
     rating: { rate: 4.6, count: 215 }
   },
   {
@@ -43,7 +43,7 @@ export const products: Product[] = [
     price: 59.00,
     description: 'Polarized sunglasses in a durable tortoiseshell cellulose acetate frame. Full UV400 protection with metal screw hinge details.',
     category: 'accessories',
-    image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&q=80&w=600',
     rating: { rate: 4.5, count: 86 }
   },
   {
@@ -52,7 +52,7 @@ export const products: Product[] = [
     price: 249.00,
     description: 'Ultra-compact mirrorless digital camera capturing high-fidelity raw snapshots. Perfect pocket-sized explorer tool.',
     category: 'essentials',
-    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&q=80&w=600',
     rating: { rate: 4.8, count: 64 }
   },
   {
@@ -61,7 +61,7 @@ export const products: Product[] = [
     price: 129.00,
     description: 'Windproof technical jacket with an adjustable storm hood, zippered pocket sheets, and utility loop points. Designed to endure.',
     category: 'apparel',
-    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=600',
     rating: { rate: 4.7, count: 142 }
   },
   {

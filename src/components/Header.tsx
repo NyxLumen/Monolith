@@ -60,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView }) =
         </div>
 
         {/* Center: Recessed Navigation Capsule */}
-        <div className="flex items-center gap-1 p-1 rounded-full bg-[#E5E7EB]/40 shadow-recessed border border-white/20">
+        <div className="flex items-center gap-1 p-1 rounded-full bg-[#E5E5E7] shadow-recessed border border-white/30">
           {navItems.map((item) => {
             // Map sub-views to determine active states
             const isActive = 

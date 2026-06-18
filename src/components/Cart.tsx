@@ -99,18 +99,18 @@ export const Cart: React.FC<CartProps> = ({ onReturnToShop }) => {
               className="flex items-center justify-between gap-4 p-3 rounded-2xl shadow-recessed bg-[#F4F4F6]/40 border border-white/70"
             >
               {/* Product mini frame */}
-              <div className="w-16 h-16 rounded-xl shadow-recessed bg-white p-2 flex items-center justify-center overflow-hidden border border-slate-200/40 shrink-0">
+              <div className="w-16 h-16 rounded-xl shadow-recessed bg-[#F4F4F6]/60 p-2 flex items-center justify-center overflow-hidden border border-slate-200/10 shrink-0">
                 <img 
                   src={item.product.image} 
                   alt={item.product.title} 
-                  className="max-h-full max-w-full object-contain select-none" 
+                  className="max-h-full max-w-full object-contain blend-multiply-desaturate select-none" 
                   draggable={false}
                 />
               </div>
 
               {/* Title & Price specs */}
               <div className="flex-grow min-w-0 flex flex-col gap-1">
-                <h4 className="font-heading text-xs font-semibold text-slate-800 truncate uppercase">
+                <h4 className="font-heading text-xs font-semibold text-slate-800 truncate">
                   {item.product.title}
                 </h4>
                 <div className="font-mono text-[9px] text-slate-400 font-semibold">
