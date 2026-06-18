@@ -122,7 +122,7 @@ export default function Shop({ searchQuery = '', setSearchQuery }: ShopProps) {
                       ${(activeCategory === cat.id && !searchQuery) ? 'bg-mono-bg shadow-neo-inset-sm text-mono-text' : 'text-mono-muted hover:text-mono-text'}
                     `}
                   >
-                    <div className={`w-6 h-6 rounded-md flex items-center justify-center ${(activeCategory === cat.id && !searchQuery) ? 'shadow-neo-sm' : 'shadow-none'}`}>
+                    <div className="w-6 h-6 rounded-md flex items-center justify-center">
                        <div className="w-2 h-2 rounded-full bg-current opacity-70"></div>
                     </div>
                     {cat.label}
