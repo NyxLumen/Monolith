@@ -4,6 +4,7 @@ import type { ViewType } from './types';
 import { NavigationDock } from './components/NavigationDock';
 import { CartProvider, useCart } from './context/CartContext';
 import { Showcase } from './components/Showcase';
+import { ProductDetail } from './components/ProductDetail';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('showcase');
@@ -28,16 +29,14 @@ function AppContent() {
           <Showcase onSelectProduct={handleSelectProduct} />
         )}
 
-        {currentView === 'detail' && (
-          <div className="w-full p-8 rounded-2xl shadow-recessed bg-slate-200/50 flex flex-col items-center justify-center min-h-[30rem] gap-4">
-            <h2 className="text-xl font-light tracking-wide text-slate-800">PRODUCT INSPECT BAY</h2>
-            <p className="text-sm font-mono text-slate-500">
-              Active Inspect ID: #{activeProductId}
-            </p>
-            <p className="text-xs text-slate-500 max-w-md text-center leading-relaxed font-body">
-              Product details console is coming in Checkpoint 6. Select the Shop key in the dock to return to the catalog.
-            </p>
-          </div>
+        {currentView === 'detail' && activeProductId !== null && (
+          <ProductDetail 
+            productId={activeProductId} 
+            onBack={() => {
+              setActiveProductId(null);
+              setCurrentView('showcase');
+            }} 
+          />
         )}
 
         {currentView === 'cart' && (
