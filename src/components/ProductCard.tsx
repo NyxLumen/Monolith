@@ -1,70 +1,30 @@
-import React from 'react';
-import type { Product } from '../types';
-import { useCart } from '../context/CartContext';
 import { Plus } from 'lucide-react';
 
 interface ProductCardProps {
-  product: Product;
-  onSelect: (productId: number) => void;
+  name: string;
+  price: string;
+  imageUrl: string;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
-  const { addToCart, cart } = useCart();
-  
-  const cartItem = cart.find((item) => item.product.id === product.id);
-  const quantity = cartItem ? cartItem.quantity : 0;
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent opening product detail when clicking add button
-    addToCart(product);
-  };
-
+export default function ProductCard({ name, price, imageUrl }: ProductCardProps) {
   return (
-    <article 
-      onClick={() => onSelect(product.id)}
-      className="p-3.5 rounded-[2rem] shadow-raised bg-white flex flex-col gap-3 justify-between transition-spring hover:translate-y-[-2px] border border-white/80 relative cursor-pointer group select-none w-full"
-    >
-      
-      {/* Add-to-Cart Circular Button in Top-Right Corner */}
-      <button
-        onClick={handleAddToCart}
-        className="w-8 h-8 rounded-full shadow-key-raised bg-white hover:bg-slate-50 text-slate-800 hover:text-slate-950 flex items-center justify-center cursor-pointer border border-white/80 active:scale-90 transition-spring absolute top-3 right-3 z-10"
-        title="Add to Cart"
-      >
-        <Plus className="w-3.5 h-3.5 stroke-[3.5px] text-slate-600" />
-        
-        {/* Quantity Badge on Button */}
-        {quantity > 0 && (
-          <span className="absolute -top-1 -right-1 bg-[#FD4912] text-white font-mono font-bold text-[8px] w-4.5 h-4.5 rounded-full flex items-center justify-center border border-white animate-badge-scale shadow-sm">
-            {quantity}
-          </span>
-        )}
-      </button>
-
-      {/* Recessed Image Bay with multiply blend mode to blend product images seamlessly */}
-      <div className="aspect-square w-full rounded-2xl bg-[#F4F4F6]/55 shadow-recessed p-3 flex items-center justify-center overflow-hidden border border-slate-200/10">
+    <div className="bg-mono-bg rounded-2xl p-3 lg:p-4 shadow-neo-sm hover:shadow-neo transition-all duration-300 flex flex-col group cursor-pointer">
+      <div className="relative w-full aspect-square rounded-xl bg-mono-bg shadow-neo-inset-sm mb-3 lg:mb-4 overflow-hidden flex items-center justify-center p-4 lg:p-6">
         <img 
-          src={product.image} 
-          alt={product.title} 
-          className="max-h-[85%] max-w-[85%] object-contain blend-multiply-desaturate group-hover:scale-105 transition-spring select-none"
-          loading="lazy"
-          draggable={false}
+          src={imageUrl} 
+          alt={name} 
+          className="object-contain w-full h-full mix-blend-multiply opacity-80 group-hover:scale-105 transition-transform duration-500"
         />
+        
+        <button className="absolute top-2 right-2 lg:top-3 lg:right-3 w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-mono-bg shadow-neo-sm hover:shadow-neo-inset flex items-center justify-center text-mono-text transition-all">
+          <Plus size={14} className="lg:w-4 lg:h-4" />
+        </button>
       </div>
-
-      {/* Title & Price specs */}
-      <div className="flex flex-col items-start px-1.5 pb-1">
-        <h3 
-          className="font-heading text-[11px] font-semibold text-slate-700 truncate w-full"
-          title={product.title}
-        >
-          {product.title}
-        </h3>
-        <span className="font-mono text-xs font-bold text-slate-950 mt-1 select-none">
-          ${product.price.toFixed(2)}
-        </span>
+      
+      <div className="px-1 lg:px-2">
+        <h3 className="text-xs lg:text-sm font-semibold text-mono-text mb-1">{name}</h3>
+        <p className="text-[0.65rem] lg:text-xs text-mono-muted font-medium">{price}</p>
       </div>
-
-    </article>
+    </div>
   );
-};
+}

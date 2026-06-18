@@ -1,87 +1,36 @@
-import { useState } from 'react';
-import { Header } from './components/Header';
-import type { ViewType } from './types';
-import { NavigationDock } from './components/NavigationDock';
-import { CartProvider, useCart } from './context/CartContext';
-import { Showcase } from './components/Showcase';
-import { ProductDetail } from './components/ProductDetail';
-import { Cart } from './components/Cart';
-import { SystemDashboard } from './components/SystemDashboard';
-import { About } from './components/About';
-
-function AppContent() {
-  const [currentView, setCurrentView] = useState<ViewType>('showcase');
-  const [activeProductId, setActiveProductId] = useState<number | null>(null);
-  const { cartCount } = useCart();
-
-  const handleSelectProduct = (productId: number) => {
-    setActiveProductId(productId);
-    setCurrentView('detail');
-  };
-
-  return (
-    <div className="min-h-screen p-4 md:p-6 flex flex-col items-center text-slate-800 bg-[#F4F4F6] relative w-full">
-      
-      {/* Header Section */}
-      <Header currentView={currentView} setCurrentView={setCurrentView} />
-
-      {/* Main Viewport */}
-      <main className="w-full max-w-5xl flex-grow flex flex-col justify-start items-center my-6">
-        
-        {currentView === 'showcase' && (
-          <Showcase onSelectProduct={handleSelectProduct} />
-        )}
-
-        {currentView === 'detail' && activeProductId !== null && (
-          <ProductDetail 
-            productId={activeProductId} 
-            onBack={() => {
-              setActiveProductId(null);
-              setCurrentView('showcase');
-            }} 
-          />
-        )}
-
-        {currentView === 'cart' && (
-          <Cart onReturnToShop={() => setCurrentView('showcase')} />
-        )}
-
-        {currentView === 'about' && (
-          <About onReturnToShop={() => setCurrentView('showcase')} />
-        )}
-
-        {currentView === 'system' && (
-          <SystemDashboard />
-        )}
-
-      </main>
-
-      {/* Floating Navigation Dock (Mobile Footer Capsule) */}
-      <NavigationDock 
-        currentView={currentView}
-        setCurrentView={setCurrentView}
-        cartCount={cartCount}
-      />
-
-      <footer className="mt-8 mb-24 font-mono text-[9px] text-slate-400 tracking-[0.2em] uppercase flex items-center gap-2 select-none">
-        <span>MONOLITH // TIMELESS ESSENTIALS</span>
-        <button 
-          onClick={() => setCurrentView('system')} 
-          className="text-slate-300 hover:text-slate-500 cursor-pointer ml-1 transition-colors"
-          title="Hardware Telemetry Configuration"
-        >
-          ⚙️
-        </button>
-      </footer>
-    </div>
-  );
-}
+import Header from './components/Header';
+import Hero from './components/Hero';
+import FeaturedProducts from './components/FeaturedProducts';
 
 function App() {
   return (
-    <CartProvider>
-      <AppContent />
-    </CartProvider>
+    <div className="min-h-screen bg-mono-bg text-mono-text font-body pb-24 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col">
+        <Header />
+        <main className="flex-1">
+          <Hero />
+          <FeaturedProducts />
+        </main>
+      </div>
+
+      {/* Bottom pill navigation as shown in the layout (duplicate of header nav for mobile/bottom floating) */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 lg:hidden">
+        <nav className="flex items-center gap-2 bg-mono-bg px-2 py-2 rounded-full shadow-neo border border-white/30">
+          <a href="#" className="flex flex-col items-center gap-1 px-4 py-2 rounded-full bg-mono-bg shadow-neo-inset transition-all text-[0.65rem] font-bold text-mono-text">
+            <span className="w-5 h-5 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            Home
+          </a>
+          <a href="#" className="flex flex-col items-center gap-1 px-4 py-2 rounded-full hover:bg-mono-bg hover:shadow-neo-inset transition-all text-[0.65rem] font-medium text-mono-muted">
+            <span className="w-5 h-5 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span>
+            Cart
+          </a>
+          <a href="#" className="flex flex-col items-center gap-1 px-4 py-2 rounded-full hover:bg-mono-bg hover:shadow-neo-inset transition-all text-[0.65rem] font-medium text-mono-muted">
+            <span className="w-5 h-5 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            About
+          </a>
+        </nav>
+      </div>
+    </div>
   );
 }
 

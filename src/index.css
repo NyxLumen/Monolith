@@ -1,120 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-mono-bg text-slate-800 font-body transition-colors duration-300;
+    @apply bg-mono-bg text-mono-text font-body antialiased;
   }
-
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-medium tracking-tight;
-  }
-}
-
-@layer utilities {
-  /* Dynamic skeuomorphic helper classes using tailwind config definitions */
-  
-  .shadow-raised {
-    --nm-shadow-distance: 8px;
-    --nm-shadow-blur: 24px;
-    --nm-shadow-color: rgba(163, 177, 198, 0.16);
-    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.95);
-    --nm-shadow-light-source: 315deg;
-
-    --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
-    --nm-shadow-y: calc(var(--nm-shadow-distance) * cos(var(--nm-shadow-light-source, 315deg)));
-    --nm-shadow-highlight: calc(var(--nm-shadow-x) * -1) calc(var(--nm-shadow-y) * -1) var(--nm-shadow-blur) var(--nm-shadow-highlight-color);
-    --nm-shadow-cast: var(--nm-shadow-x) var(--nm-shadow-y) var(--nm-shadow-blur) var(--nm-shadow-color);
-    --nm-shadow: var(--nm-shadow-cast), var(--nm-shadow-highlight);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
-  }
-  
-  .shadow-recessed {
-    --nm-shadow-distance: 6px;
-    --nm-shadow-blur: 18px;
-    --nm-shadow-color: rgba(163, 177, 198, 0.14);
-    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.9);
-    --nm-shadow-light-source: 315deg;
-
-    --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
-    --nm-shadow-y: calc(var(--nm-shadow-distance) * cos(var(--nm-shadow-light-source, 315deg)));
-    --nm-shadow-highlight: calc(var(--nm-shadow-x) * -1) calc(var(--nm-shadow-y) * -1) var(--nm-shadow-blur) var(--nm-shadow-highlight-color);
-    --nm-shadow-cast: var(--nm-shadow-x) var(--nm-shadow-y) var(--nm-shadow-blur) var(--nm-shadow-color);
-    --nm-shadow: inset var(--nm-shadow-cast), inset var(--nm-shadow-highlight);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
-  }
-  
-  .shadow-key-raised {
-    --nm-shadow-distance: 4px;
-    --nm-shadow-blur: 12px;
-    --nm-shadow-color: rgba(163, 177, 198, 0.12);
-    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.95);
-    --nm-shadow-light-source: 315deg;
-
-    --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
-    --nm-shadow-y: calc(var(--nm-shadow-distance) * cos(var(--nm-shadow-light-source, 315deg)));
-    --nm-shadow-highlight: calc(var(--nm-shadow-x) * -1) calc(var(--nm-shadow-y) * -1) var(--nm-shadow-blur) var(--nm-shadow-highlight-color);
-    --nm-shadow-cast: var(--nm-shadow-x) var(--nm-shadow-y) var(--nm-shadow-blur) var(--nm-shadow-color);
-    --nm-shadow: var(--nm-shadow-cast), var(--nm-shadow-highlight);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
-  }
-  
-  .shadow-key-recessed {
-    --nm-shadow-distance: 4px;
-    --nm-shadow-blur: 12px;
-    --nm-shadow-color: rgba(163, 177, 198, 0.12);
-    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.9);
-    --nm-shadow-light-source: 315deg;
-
-    --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
-    --nm-shadow-y: calc(var(--nm-shadow-distance) * cos(var(--nm-shadow-light-source, 315deg)));
-    --nm-shadow-highlight: calc(var(--nm-shadow-x) * -1) calc(var(--nm-shadow-y) * -1) var(--nm-shadow-blur) var(--nm-shadow-highlight-color);
-    --nm-shadow-cast: var(--nm-shadow-x) var(--nm-shadow-y) var(--nm-shadow-blur) var(--nm-shadow-color);
-    --nm-shadow: inset var(--nm-shadow-cast), inset var(--nm-shadow-highlight);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
-  }
-
-  /* Mockup Visual Panel Helpers */
-  .glass-panel {
-    background: #FFFFFF;
-    border: 1px solid rgba(255, 255, 255, 0.7);
-  }
-
-  .glass-panel-dark {
-    background: #1E293B;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-
-  /* Transition for physical spring buttons */
-  .transition-spring {
-    @apply transition-all duration-300 ease-spring;
-  }
-  
-  /* Blending mode styling for showcase cards */
-  .blend-multiply-desaturate {
-    mix-blend-mode: multiply;
-    filter: contrast(1.05) saturate(0.95);
-  }
-
-  /* Recessed scrollbar track like a console groove */
-  .console-scrollbar::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  
-  .console-scrollbar::-webkit-scrollbar-track {
-    @apply bg-slate-300/50 rounded-full shadow-inner;
-  }
-  
-  .console-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-slate-400 rounded-full border-2 border-transparent bg-clip-padding;
-  }
-  
-  .console-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-500;
+    @apply font-heading tracking-tight;
   }
 }
