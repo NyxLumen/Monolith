@@ -4,13 +4,19 @@ import FeaturedProducts from './components/FeaturedProducts';
 
 function App() {
   return (
-    <div className="min-h-screen bg-mono-bg text-mono-text font-body pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-mono-bg text-mono-text font-body pb-24 lg:pb-0 relative overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col">
         <Header />
         <main className="flex-1">
           <Hero />
           <FeaturedProducts />
         </main>
+
+        <footer className="w-full py-8 lg:py-12 flex justify-center items-center">
+          <p className="text-[0.65rem] lg:text-xs text-mono-muted font-bold tracking-[0.2em] uppercase">
+            &copy; {new Date().getFullYear()} nyxlumen
+          </p>
+        </footer>
       </div>
 
       {/* Bottom pill navigation as shown in the layout (duplicate of header nav for mobile/bottom floating) */}
