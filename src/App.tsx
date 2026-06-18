@@ -14,7 +14,7 @@ function App() {
       <div className="max-w-7xl mx-auto flex flex-col">
         <Header setCurrentPage={setCurrentPage} />
         
-        <main className="flex-1 flex flex-col items-center">
+        <main className="flex-1 w-full">
           {currentPage === 'home' ? (
             <>
               <Hero />
