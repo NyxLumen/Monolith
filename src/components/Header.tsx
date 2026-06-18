@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Header: React.FC = () => {
   return (
-    <header className="w-full max-w-5xl mx-auto mb-8 p-6 rounded-2xl shadow-raised bg-white/80 backdrop-blur-md border border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4 transition-spring">
+    <header className="w-full max-w-5xl mx-auto mb-8 p-6 rounded-2xl shadow-raised bg-gradient-to-br from-slate-100 to-slate-200/90 border border-white/50 flex flex-col sm:flex-row justify-between items-center gap-4 transition-spring">
       
       {/* Brand & Precise Specs */}
       <div className="flex flex-col">
@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
             <span className="text-slate-300">VOLUME</span>
             <span className="text-slate-700">7.2</span>
           </div>
-          <div className="w-6 h-6 rounded-full shadow-key-raised bg-white border border-slate-200 flex items-center justify-center cursor-pointer hover:rotate-45 transition-transform duration-300">
+          <div className="w-6 h-6 rounded-full shadow-key-raised bg-mono-bg border border-white/60 flex items-center justify-center cursor-pointer hover:rotate-45 transition-transform duration-300">
             {/* Dial indicator mark */}
             <div className="w-[1.5px] h-2 bg-slate-400 -translate-y-1.5 rounded-full"></div>
           </div>

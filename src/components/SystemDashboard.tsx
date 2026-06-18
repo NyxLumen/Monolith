@@ -57,11 +57,11 @@ export const SystemDashboard: React.FC = () => {
   }, []);
 
   return (
-    <section className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8 rounded-3xl shadow-raised bg-white border border-slate-200">
+    <section className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8 rounded-3xl shadow-raised bg-gradient-to-br from-slate-100 to-slate-200/90 border border-white/40">
       
       {/* Left Column: Parameter controls */}
       <div className="flex flex-col gap-6">
-        <div className="flex items-center gap-2 pb-3 border-b border-slate-100 select-none">
+        <div className="flex items-center gap-2 pb-3 border-b border-slate-200/60 select-none">
           <Sliders className="w-4 h-4 text-slate-500" />
           <h2 className="font-heading text-sm font-bold tracking-wider text-slate-500 uppercase">
             Console Parameters
@@ -70,10 +70,10 @@ export const SystemDashboard: React.FC = () => {
 
         <div className="flex flex-col gap-5">
           {/* Blur Radius Slider */}
-          <div className="flex flex-col gap-2 p-4 rounded-2xl shadow-recessed bg-slate-50 border border-slate-100">
+          <div className="flex flex-col gap-2 p-4 rounded-2xl shadow-recessed bg-slate-200/80 border border-slate-300/20">
             <div className="flex justify-between items-center text-[9px] font-mono font-bold text-slate-400 uppercase select-none tracking-wider">
               <span>SHADOW BLUR RADIUS</span>
-              <span className="px-2 py-0.5 rounded shadow-recessed bg-white border border-slate-200 text-slate-700">{blur}px</span>
+              <span className="px-2 py-0.5 rounded shadow-recessed bg-slate-100 border border-white/45 text-slate-700">{blur}px</span>
             </div>
             <input 
               type="range" 
@@ -86,10 +86,10 @@ export const SystemDashboard: React.FC = () => {
           </div>
 
           {/* Light Intensity Slider */}
-          <div className="flex flex-col gap-2 p-4 rounded-2xl shadow-recessed bg-slate-50 border border-slate-100">
+          <div className="flex flex-col gap-2 p-4 rounded-2xl shadow-recessed bg-slate-200/80 border border-slate-300/20">
             <div className="flex justify-between items-center text-[9px] font-mono font-bold text-slate-400 uppercase select-none tracking-wider">
               <span>LIGHT SOURCE INTENSITY</span>
-              <span className="px-2 py-0.5 rounded shadow-recessed bg-white border border-slate-200 text-slate-700">{intensity}%</span>
+              <span className="px-2 py-0.5 rounded shadow-recessed bg-slate-100 border border-white/45 text-slate-700">{intensity}%</span>
             </div>
             <input 
               type="range" 
@@ -102,10 +102,10 @@ export const SystemDashboard: React.FC = () => {
           </div>
 
           {/* Bevel Thickness Slider */}
-          <div className="flex flex-col gap-2 p-4 rounded-2xl shadow-recessed bg-slate-50 border border-slate-100">
+          <div className="flex flex-col gap-2 p-4 rounded-2xl shadow-recessed bg-slate-200/80 border border-slate-300/20">
             <div className="flex justify-between items-center text-[9px] font-mono font-bold text-slate-400 uppercase select-none tracking-wider">
               <span>BEVEL THICKNESS OFFSET</span>
-              <span className="px-2 py-0.5 rounded shadow-recessed bg-white border border-slate-200 text-slate-700">{bevel}mm</span>
+              <span className="px-2 py-0.5 rounded shadow-recessed bg-slate-100 border border-white/45 text-slate-700">{bevel}mm</span>
             </div>
             <input 
               type="range" 
@@ -123,7 +123,7 @@ export const SystemDashboard: React.FC = () => {
       <div className="flex flex-col gap-6 justify-between">
         
         <div>
-          <div className="flex items-center gap-2 pb-3 border-b border-slate-100 select-none">
+          <div className="flex items-center gap-2 pb-3 border-b border-slate-200/60 select-none">
             <Cpu className="w-4 h-4 text-slate-500" />
             <h2 className="font-heading text-sm font-bold tracking-wider text-slate-500 uppercase">
               System Telemetry
@@ -134,7 +134,7 @@ export const SystemDashboard: React.FC = () => {
           <div className="grid grid-cols-2 gap-4 mt-4">
             
             {/* Temp Screen */}
-            <div className="p-4 rounded-2xl shadow-recessed bg-slate-50 border border-slate-100 flex items-center justify-between">
+            <div className="p-4 rounded-2xl shadow-recessed bg-slate-200/80 border border-slate-300/20 flex items-center justify-between">
               <div className="flex flex-col gap-1">
                 <span className="text-[7px] font-mono font-bold text-slate-400 uppercase tracking-wider select-none">CONSOLE TEMP</span>
                 <span className="font-mono text-sm font-bold text-slate-800">{temp}°C</span>
@@ -143,7 +143,7 @@ export const SystemDashboard: React.FC = () => {
             </div>
 
             {/* Load Screen */}
-            <div className="p-4 rounded-2xl shadow-recessed bg-slate-50 border border-slate-100 flex items-center justify-between">
+            <div className="p-4 rounded-2xl shadow-recessed bg-slate-200/80 border border-slate-300/20 flex items-center justify-between">
               <div className="flex flex-col gap-1">
                 <span className="text-[7px] font-mono font-bold text-slate-400 uppercase tracking-wider select-none">PROCESS LOAD</span>
                 <span className="font-mono text-sm font-bold text-slate-800">{systemLoad}%</span>
@@ -158,7 +158,7 @@ export const SystemDashboard: React.FC = () => {
         <div className="flex flex-col gap-3">
           <span className="text-[8px] font-mono font-bold text-slate-400 uppercase tracking-wider select-none">Live Telemetry Streams</span>
           
-          <div className="p-4 rounded-2xl shadow-recessed bg-slate-950 text-slate-400 font-mono text-[9px] flex flex-col gap-2 min-h-32 justify-start border border-slate-900 leading-normal">
+          <div className="p-4 rounded-2xl shadow-recessed bg-slate-900 text-slate-400 font-mono text-[9px] flex flex-col gap-2 min-h-32 justify-start border border-slate-950/40 leading-normal">
             {logs.map((log, index) => (
               <div key={index} className="flex gap-2 items-start">
                 <span className="text-emerald-500 select-none">&gt;</span>

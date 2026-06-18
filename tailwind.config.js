@@ -15,16 +15,6 @@ export default {
         heading: ['Rubik', 'sans-serif'],
         body: ['"Nunito Sans"', 'sans-serif'],
       },
-      boxShadow: {
-        // Raised neumorphic state (light from top-left, shadow on bottom-right)
-        'raised-light': '-6px -6px 14px rgba(255, 255, 255, 0.9), 6px 6px 14px rgba(163, 177, 198, 0.4)',
-        // Recessed neumorphic state (inset shadows with matching light source)
-        'recessed-light': 'inset -6px -6px 14px rgba(255, 255, 255, 0.85), inset 6px 6px 14px rgba(163, 177, 198, 0.4)',
-        // Mini key raised (for small tactile keys / buttons)
-        'key-raised-light': '-3px -3px 8px rgba(255, 255, 255, 0.9), 3px 3px 8px rgba(163, 177, 198, 0.35)',
-        // Mini key recessed
-        'key-recessed-light': 'inset -3px -3px 8px rgba(255, 255, 255, 0.85), inset 3px 3px 8px rgba(163, 177, 198, 0.35)',
-      },
       transitionTimingFunction: {
         'spring': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       },
@@ -41,5 +31,7 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-neumorphism-ui')
+  ],
 }

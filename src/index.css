@@ -18,19 +18,63 @@
   /* Dynamic skeuomorphic helper classes using tailwind config definitions */
   
   .shadow-raised {
-    @apply shadow-raised-light;
+    --nm-shadow-distance: 6px;
+    --nm-shadow-blur: 14px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.4);
+    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.9);
+    --nm-shadow-light-source: 315deg;
+
+    --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
+    --nm-shadow-y: calc(var(--nm-shadow-distance) * cos(var(--nm-shadow-light-source, 315deg)));
+    --nm-shadow-highlight: calc(var(--nm-shadow-x) * -1) calc(var(--nm-shadow-y) * -1) var(--nm-shadow-blur) var(--nm-shadow-highlight-color);
+    --nm-shadow-cast: var(--nm-shadow-x) var(--nm-shadow-y) var(--nm-shadow-blur) var(--nm-shadow-color);
+    --nm-shadow: var(--nm-shadow-cast), var(--nm-shadow-highlight);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
   }
   
   .shadow-recessed {
-    @apply shadow-recessed-light;
+    --nm-shadow-distance: 6px;
+    --nm-shadow-blur: 14px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.4);
+    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.85);
+    --nm-shadow-light-source: 315deg;
+
+    --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
+    --nm-shadow-y: calc(var(--nm-shadow-distance) * cos(var(--nm-shadow-light-source, 315deg)));
+    --nm-shadow-highlight: calc(var(--nm-shadow-x) * -1) calc(var(--nm-shadow-y) * -1) var(--nm-shadow-blur) var(--nm-shadow-highlight-color);
+    --nm-shadow-cast: var(--nm-shadow-x) var(--nm-shadow-y) var(--nm-shadow-blur) var(--nm-shadow-color);
+    --nm-shadow: inset var(--nm-shadow-cast), inset var(--nm-shadow-highlight);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
   }
   
   .shadow-key-raised {
-    @apply shadow-key-raised-light;
+    --nm-shadow-distance: 3px;
+    --nm-shadow-blur: 8px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.35);
+    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.95);
+    --nm-shadow-light-source: 315deg;
+
+    --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
+    --nm-shadow-y: calc(var(--nm-shadow-distance) * cos(var(--nm-shadow-light-source, 315deg)));
+    --nm-shadow-highlight: calc(var(--nm-shadow-x) * -1) calc(var(--nm-shadow-y) * -1) var(--nm-shadow-blur) var(--nm-shadow-highlight-color);
+    --nm-shadow-cast: var(--nm-shadow-x) var(--nm-shadow-y) var(--nm-shadow-blur) var(--nm-shadow-color);
+    --nm-shadow: var(--nm-shadow-cast), var(--nm-shadow-highlight);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
   }
   
   .shadow-key-recessed {
-    @apply shadow-key-recessed-light;
+    --nm-shadow-distance: 3px;
+    --nm-shadow-blur: 8px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.35);
+    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.8);
+    --nm-shadow-light-source: 315deg;
+
+    --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
+    --nm-shadow-y: calc(var(--nm-shadow-distance) * cos(var(--nm-shadow-light-source, 315deg)));
+    --nm-shadow-highlight: calc(var(--nm-shadow-x) * -1) calc(var(--nm-shadow-y) * -1) var(--nm-shadow-blur) var(--nm-shadow-highlight-color);
+    --nm-shadow-cast: var(--nm-shadow-x) var(--nm-shadow-y) var(--nm-shadow-blur) var(--nm-shadow-color);
+    --nm-shadow: inset var(--nm-shadow-cast), inset var(--nm-shadow-highlight);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
   }
 
   /* Transition for physical spring buttons */
