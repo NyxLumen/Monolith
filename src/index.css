@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-mono-bg text-slate-800 font-body transition-colors duration-300;
+  }
+  
+  body.dark {
+    @apply bg-mono-bgdark text-slate-100;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-medium tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* Dynamic skeuomorphic helper classes using tailwind config definitions */
+  
+  .shadow-raised {
+    @apply shadow-raised dark:shadow-raised-dark;
+  }
+  
+  .shadow-recessed {
+    @apply shadow-recessed dark:shadow-recessed-dark;
+  }
+  
+  .shadow-key-raised {
+    @apply shadow-key-raised dark:shadow-key-raised-dark;
+  }
+  
+  .shadow-key-recessed {
+    @apply shadow-key-recessed dark:shadow-key-recessed-dark;
+  }
+
+  /* Transition for physical spring buttons */
+  .transition-spring {
+    @apply transition-all duration-300 ease-spring;
+  }
+  
+  /* Blending mode styling for showcase cards */
+  .blend-multiply-desaturate {
+    mix-blend-mode: multiply;
+    filter: contrast(1.05) saturate(0.95);
+  }
+  
+  .dark .blend-multiply-desaturate {
+    mix-blend-mode: screen;
+    filter: contrast(1.1) brightness(0.9) saturate(0.9);
+  }
+
+  /* Recessed scrollbar track like a console groove */
+  .console-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .console-scrollbar::-webkit-scrollbar-track {
+    @apply bg-slate-300/50 dark:bg-slate-900/50 rounded-full shadow-inner;
+  }
+  
+  .console-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-400 dark:bg-slate-700 rounded-full border-2 border-transparent bg-clip-padding;
+  }
+  
+  .console-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500 dark:bg-slate-600;
+  }
+}
