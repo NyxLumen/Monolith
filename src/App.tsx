@@ -2,12 +2,18 @@ import { useState } from 'react';
 import { Header } from './components/Header';
 import type { ViewType } from './types';
 import { NavigationDock } from './components/NavigationDock';
+import { CartProvider, useCart } from './context/CartContext';
+import { Showcase } from './components/Showcase';
 
-function App() {
+function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('showcase');
   const [activeProductId, setActiveProductId] = useState<number | null>(null);
-  const [btnState, setBtnState] = useState<boolean>(false);
-  const [cartCount, setCartCount] = useState<number>(3);
+  const { cartCount } = useCart();
+
+  const handleSelectProduct = (productId: number) => {
+    setActiveProductId(productId);
+    setCurrentView('detail');
+  };
 
   return (
     <div className="min-h-screen p-4 md:p-8 flex flex-col items-center bg-mono-bg text-slate-800 transition-colors duration-300">
@@ -16,63 +22,44 @@ function App() {
       <Header />
 
       {/* Main Console Viewport */}
-      <main className="w-full max-w-5xl flex-grow flex flex-col justify-center items-center">
+      <main className="w-full max-w-5xl flex-grow flex flex-col justify-start items-center my-6">
         
-        {/* Temporary layout contents to show view switching state */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-6 rounded-2xl shadow-recessed bg-slate-200/50">
-          
-          <section className="p-6 rounded-xl shadow-raised bg-mono-bg flex flex-col gap-4">
-            <h2 className="text-xl text-slate-800 font-light tracking-wide">Tactile Module</h2>
-            <p className="text-sm text-slate-600 leading-relaxed font-body">
-              This panel demonstrates skeuomorphic elevation physics. Click the button to toggle shadow states and increment the cart indicator.
-            </p>
-            
-            <button
-              onClick={() => {
-                setBtnState(!btnState);
-                setCartCount((c) => c + 1);
-              }}
-              className={`mt-4 py-3 px-6 rounded-lg text-xs font-mono tracking-widest transition-spring ${
-                btnState 
-                  ? 'shadow-key-recessed text-slate-900' 
-                  : 'shadow-key-raised text-slate-600'
-              }`}
-            >
-              {btnState ? 'DEPRESSED' : 'ELEVATED'}
-            </button>
-          </section>
+        {currentView === 'showcase' && (
+          <Showcase onSelectProduct={handleSelectProduct} />
+        )}
 
-          <section className="p-6 rounded-xl shadow-recessed bg-mono-bg flex flex-col gap-4">
-            <h2 className="text-xl text-slate-800 font-light tracking-wide">Viewport Controls</h2>
-            <p className="text-sm text-slate-600 leading-relaxed font-body">
-              Select an interface section from the controller below, or manually trigger views here (Selected Detail: {activeProductId !== null ? `#${activeProductId}` : 'NONE'}):
+        {currentView === 'detail' && (
+          <div className="w-full p-8 rounded-2xl shadow-recessed bg-slate-200/50 flex flex-col items-center justify-center min-h-[30rem] gap-4">
+            <h2 className="text-xl font-light tracking-wide text-slate-800">PRODUCT INSPECT BAY</h2>
+            <p className="text-sm font-mono text-slate-500">
+              Active Inspect ID: #{activeProductId}
             </p>
-            
-            <div className="grid grid-cols-2 gap-3 mt-2">
-              {(['showcase', 'detail', 'cart', 'system'] as ViewType[]).map((v) => (
-                <button
-                  key={v}
-                  onClick={() => {
-                    setCurrentView(v);
-                    if (v !== 'detail') {
-                      setActiveProductId(null);
-                    } else {
-                      setActiveProductId(101); // Mock product detail trigger
-                    }
-                  }}
-                  className={`py-2 px-3 rounded-lg text-xs font-mono transition-spring uppercase tracking-wider ${
-                    currentView === v
-                      ? 'shadow-key-recessed text-slate-950 font-bold'
-                      : 'shadow-key-raised text-slate-500'
-                  }`}
-                >
-                  {v}
-                </button>
-              ))}
-            </div>
-          </section>
+            <p className="text-xs text-slate-500 max-w-md text-center leading-relaxed font-body">
+              Product details console is coming in Checkpoint 6. Select the Shop key in the dock to return to the catalog.
+            </p>
+          </div>
+        )}
 
-        </div>
+        {currentView === 'cart' && (
+          <div className="w-full p-8 rounded-2xl shadow-recessed bg-slate-200/50 flex flex-col items-center justify-center min-h-[30rem] gap-4">
+            <h2 className="text-xl font-light tracking-wide text-slate-800">SHOPPING CART LEDGER</h2>
+            <p className="text-sm font-mono text-slate-500">
+              Total items in ledger: {cartCount}
+            </p>
+            <p className="text-xs text-slate-500 max-w-md text-center leading-relaxed font-body">
+              Tactile shopping ledger and checkout sliders are coming in Checkpoint 7.
+            </p>
+          </div>
+        )}
+
+        {currentView === 'system' && (
+          <div className="w-full p-8 rounded-2xl shadow-recessed bg-slate-200/50 flex flex-col items-center justify-center min-h-[30rem] gap-4">
+            <h2 className="text-xl font-light tracking-wide text-slate-800">SYSTEM ADJUSTMENT BOARD</h2>
+            <p className="text-xs text-slate-500 max-w-md text-center leading-relaxed font-body">
+              Physical shadow controls, latency adjustment dials, and system stats are coming in Checkpoint 8.
+            </p>
+          </div>
+        )}
 
       </main>
 
@@ -87,6 +74,14 @@ function App() {
         MONOLITH // PREMIUM TACTILE HARDWARE
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <CartProvider>
+      <AppContent />
+    </CartProvider>
   );
 }
 
