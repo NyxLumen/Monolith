@@ -1,5 +1,6 @@
 import { Plus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { motion } from 'motion/react';
 
 interface ProductCardProps {
   id: string;
@@ -24,8 +25,18 @@ export default function ProductCard({ id, name, price, rawPrice, imageUrl }: Pro
     });
   };
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 260, damping: 20 } }
+  };
+
   return (
-    <div className="relative bg-mono-bg rounded-2xl p-4 lg:p-5 shadow-neo-sm hover:shadow-neo transition-all duration-300 flex flex-col group cursor-pointer">
+    <motion.div 
+      variants={itemVariants}
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      className="relative bg-mono-bg rounded-2xl p-4 lg:p-5 shadow-neo-sm hover:shadow-neo flex flex-col group cursor-pointer"
+    >
       <div className="relative w-full aspect-square rounded-xl mb-4 lg:mb-5 overflow-hidden flex items-center justify-center p-0">
         <img 
           src={imageUrl} 
@@ -34,17 +45,19 @@ export default function ProductCard({ id, name, price, rawPrice, imageUrl }: Pro
         />
       </div>
       
-      <button 
+      <motion.button 
         onClick={handleAddToCart}
-        className="absolute top-3 right-3 lg:top-4 lg:right-4 w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-mono-bg shadow-neo-sm hover:shadow-neo-inset flex items-center justify-center text-mono-text transition-all z-10"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute top-3 right-3 lg:top-4 lg:right-4 w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-mono-bg shadow-neo-sm hover:shadow-neo-inset flex items-center justify-center text-mono-text z-10"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-      </button>
+      </motion.button>
       
       <div className="mt-auto flex flex-col">
         <h3 className="text-sm lg:text-base font-bold text-mono-text truncate mb-1">{name}</h3>
         <p className="text-sm lg:text-base font-medium text-mono-muted">{price}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }

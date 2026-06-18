@@ -1,6 +1,7 @@
 import { ArrowRight, ShieldCheck, Clock, CheckCircle, Lock, Package } from 'lucide-react';
 import CartItem from './CartItem';
 import { useCart } from '../context/CartContext';
+import { motion } from 'motion/react';
 
 export default function Cart() {
   const { cartItems, getCartTotal } = useCart();
@@ -59,10 +60,14 @@ export default function Cart() {
               </div>
             </div>
 
-            <button className="w-full bg-[#0a0a0a] hover:bg-black text-white rounded-full py-4 px-6 flex items-center justify-center gap-3 transition-colors shadow-neo-sm mb-8 lg:mb-6">
+            <motion.button 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-[#0a0a0a] hover:bg-black text-white rounded-full py-4 px-6 flex items-center justify-center gap-3 transition-colors shadow-neo-sm mb-8 lg:mb-6"
+            >
               <span className="text-sm font-bold">Checkout</span>
               <ArrowRight size={16} />
-            </button>
+            </motion.button>
 
             {/* Mobile simplified trust badge */}
             <div className="lg:hidden flex items-center justify-center gap-2 text-mono-muted">

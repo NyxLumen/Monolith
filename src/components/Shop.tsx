@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { ShieldCheck, Truck, RefreshCw, Lock, ChevronDown, ChevronUp } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface Product {
   id: number;
@@ -189,7 +190,15 @@ export default function Shop({ searchQuery = '', setSearchQuery }: ShopProps) {
             </div>
           ) : (
             <div className="flex flex-col items-center w-full">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+                }}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full"
+              >
                 {products.map((product) => (
                   <ProductCard
                     key={product.id}
@@ -200,7 +209,7 @@ export default function Shop({ searchQuery = '', setSearchQuery }: ShopProps) {
                     imageUrl={product.thumbnail}
                   />
                 ))}
-              </div>
+              </motion.div>
               
               {/* Load More Button / Intersection target */}
               {products.length < total && (

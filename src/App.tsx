@@ -6,6 +6,7 @@ import Cart from './components/Cart';
 import About from './components/About';
 import Shop from './components/Shop';
 import { useCart } from './context/CartContext';
+import { AnimatePresence, motion } from 'motion/react';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'cart' | 'about' | 'shop'>('home');
@@ -23,15 +24,29 @@ function App() {
         />
         
         <main className="flex-1 w-full">
-          {currentPage === 'home' && (
-            <>
-              <Hero />
-              <FeaturedProducts searchQuery={searchQuery} />
-            </>
-          )}
-          {currentPage === 'shop' && <Shop searchQuery={searchQuery} setSearchQuery={setSearchQuery} />}
-          {currentPage === 'cart' && <Cart />}
-          {currentPage === 'about' && <About />}
+          <AnimatePresence mode="wait">
+            {currentPage === 'home' && (
+              <motion.div key="home" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ type: "spring", stiffness: 260, damping: 20 }}>
+                <Hero setCurrentPage={setCurrentPage} />
+                <FeaturedProducts searchQuery={searchQuery} setCurrentPage={setCurrentPage} />
+              </motion.div>
+            )}
+            {currentPage === 'shop' && (
+              <motion.div key="shop" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ type: "spring", stiffness: 260, damping: 20 }}>
+                <Shop searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+              </motion.div>
+            )}
+            {currentPage === 'cart' && (
+              <motion.div key="cart" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ type: "spring", stiffness: 260, damping: 20 }}>
+                <Cart />
+              </motion.div>
+            )}
+            {currentPage === 'about' && (
+              <motion.div key="about" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ type: "spring", stiffness: 260, damping: 20 }}>
+                <About />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </main>
 
         <footer className="w-full py-8 lg:py-12 flex justify-center items-center">

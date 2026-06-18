@@ -1,6 +1,11 @@
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
 
-export default function Hero() {
+interface HeroProps {
+  setCurrentPage: (page: 'home' | 'cart' | 'about' | 'shop') => void;
+}
+
+export default function Hero({ setCurrentPage }: HeroProps) {
   return (
     <section className="px-6 lg:px-12 py-4 lg:py-8">
       <div 
@@ -12,17 +17,35 @@ export default function Hero() {
         
         {/* Content Overlay */}
         <div className="relative z-10 px-8 lg:px-16 max-w-2xl mt-[-4rem] lg:mt-0">
-          <span className="text-[0.65rem] lg:text-xs font-bold tracking-[0.15em] text-mono-muted uppercase mb-3 lg:mb-4 block">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 20 }}
+            className="text-[0.65rem] lg:text-xs font-bold tracking-[0.15em] text-mono-muted uppercase mb-3 lg:mb-4 block"
+          >
             New Collection
-          </span>
-          <h2 className="text-4xl lg:text-6xl font-heading font-medium text-mono-text leading-[1.1] lg:leading-tight mb-6 lg:mb-8">
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 200, damping: 20 }}
+            className="text-4xl lg:text-6xl font-heading font-medium text-mono-text leading-[1.1] lg:leading-tight mb-6 lg:mb-8"
+          >
             Built for life.<br />
             Designed to last.
-          </h2>
+          </motion.h2>
           
-          <button className="inline-flex items-center gap-3 bg-mono-bg shadow-neo-sm hover:shadow-neo-inset transition-all px-6 lg:px-8 py-3 lg:py-4 rounded-full text-xs lg:text-sm font-bold tracking-wide text-mono-text">
+          <motion.button 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, type: "spring", stiffness: 200, damping: 20 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setCurrentPage('shop')}
+            className="inline-flex items-center gap-3 bg-mono-bg shadow-neo-sm hover:shadow-neo-inset transition-shadow px-6 lg:px-8 py-3 lg:py-4 rounded-full text-xs lg:text-sm font-bold tracking-wide text-mono-text"
+          >
             SHOP NOW <ArrowRight size={16} className="lg:w-[18px] lg:h-[18px]" />
-          </button>
+          </motion.button>
         </div>
 
         {/* Carousel indicators for mobile as shown in design */}

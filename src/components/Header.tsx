@@ -1,5 +1,6 @@
 import { Search, ShoppingCart, Menu } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { motion } from 'motion/react';
 
 interface HeaderProps {
   currentPage: 'home' | 'cart' | 'about' | 'shop';
@@ -37,27 +38,33 @@ export default function Header({ currentPage, setCurrentPage, searchQuery, setSe
 
       {/* Desktop Navigation */}
       <nav className="hidden lg:flex flex-1 justify-center items-center gap-12">
-        <button 
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setCurrentPage('home')} 
           className="text-sm font-bold text-mono-text hover:text-mono-muted transition-colors relative"
         >
           Home
           {currentPage === 'home' && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
-        </button>
-        <button 
+        </motion.button>
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setCurrentPage('shop')} 
           className="text-sm font-bold text-mono-text hover:text-mono-muted transition-colors relative"
         >
           Shop
           {currentPage === 'shop' && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
-        </button>
-        <button 
+        </motion.button>
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setCurrentPage('about')} 
           className="text-sm font-bold text-mono-text hover:text-mono-muted transition-colors relative"
         >
           About
           {currentPage === 'about' && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
-        </button>
+        </motion.button>
       </nav>
 
       {/* Actions */}
@@ -80,18 +87,19 @@ export default function Header({ currentPage, setCurrentPage, searchQuery, setSe
         </button>
 
         {/* Cart Button */}
-        <button 
-          onClick={() => setCurrentPage('cart')}
-          className="w-12 h-12 flex items-center justify-center rounded-full bg-mono-bg shadow-neo-sm hover:shadow-neo-inset transition-all text-mono-text relative"
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setCurrentPage('cart')} 
+          className="relative w-10 h-10 rounded-full flex justify-center items-center bg-mono-bg shadow-neo-sm hover:shadow-neo-inset transition-all"
         >
-          <ShoppingCart size={20} />
-          {/* Cart Badge */}
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mono-text"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
           {cartItems.length > 0 && (
-            <span className="absolute -top-1 -right-1 w-5 h-5 bg-black text-white rounded-full flex items-center justify-center text-[0.6rem] font-bold">
+            <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-mono-text text-mono-bg flex items-center justify-center text-[0.55rem] font-bold animate-badge-scale">
               {cartItems.length}
-            </span>
+            </div>
           )}
-        </button>
+        </motion.button>
       </div>
     </header>
   );

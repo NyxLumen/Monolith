@@ -26,6 +26,9 @@ export default {
       transitionTimingFunction: {
         'spring': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       },
+      transitionDuration: {
+        DEFAULT: '300ms',
+      },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'badge-scale': 'badge-scale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',

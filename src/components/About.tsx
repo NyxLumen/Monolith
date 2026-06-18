@@ -1,4 +1,5 @@
 import { ArrowRight, Gem, Leaf, User, Mail } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export default function About() {
   return (
@@ -18,9 +19,13 @@ export default function About() {
           <p className="text-sm lg:text-base text-mono-muted font-medium mb-10 max-w-sm leading-relaxed">
             Monolith is a mock brand built to showcase the beauty of minimal design, premium quality, and everyday functionality.
           </p>
-          <button className="px-6 py-3 rounded-full bg-mono-bg shadow-neo hover:shadow-neo-inset transition-all text-sm font-bold text-mono-text flex items-center gap-3">
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-6 py-3 rounded-full bg-mono-bg shadow-neo hover:shadow-neo-inset transition-shadow text-sm font-bold text-mono-text flex items-center gap-3"
+          >
             Our Story <ArrowRight size={16} />
-          </button>
+          </motion.button>
         </div>
 
         {/* Right Image Container */}
@@ -100,9 +105,13 @@ export default function About() {
             placeholder="Enter your email" 
             className="flex-1 bg-transparent border-none outline-none px-4 lg:px-6 text-xs lg:text-sm font-medium text-mono-text placeholder:text-mono-muted"
           />
-          <button className="bg-[#0a0a0a] text-white px-6 lg:px-8 py-3 lg:py-3.5 rounded-full text-xs lg:text-sm font-bold shadow-neo-sm hover:bg-black transition-colors">
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-[#0a0a0a] text-white px-6 lg:px-8 py-3 lg:py-3.5 rounded-full text-xs lg:text-sm font-bold shadow-neo-sm hover:bg-black transition-colors"
+          >
             Subscribe
-          </button>
+          </motion.button>
         </div>
 
       </div>
