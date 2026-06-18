@@ -11,49 +11,80 @@ interface Product {
 
 interface ShopProps {
   searchQuery?: string;
+  setSearchQuery: (query: string) => void;
 }
 
+// We will use a curated list of 6 categories to keep the UI sleek
 const CATEGORIES = [
-  { id: 'all', label: 'All Products', icon: 'grid' },
-  { id: 'bottles', label: 'Bottles', icon: 'bottle' },
-  { id: 'bags', label: 'Bags', icon: 'shopping-bag' },
-  { id: 'drinkware', label: 'Drinkware', icon: 'coffee' },
-  { id: 'accessories', label: 'Accessories', icon: 'watch' },
-  { id: 'home', label: 'Home', icon: 'home' },
-  { id: 'new', label: 'New Arrivals', icon: 'star' },
+  { id: 'all', label: 'All Products' },
+  { id: 'beauty', label: 'Beauty' },
+  { id: 'fragrances', label: 'Fragrances' },
+  { id: 'furniture', label: 'Furniture' },
+  { id: 'laptops', label: 'Laptops' },
+  { id: 'mens-watches', label: 'Men\'s Watches' },
+  { id: 'sunglasses', label: 'Sunglasses' },
 ];
 
-export default function Shop({ searchQuery = '' }: ShopProps) {
+export default function Shop({ searchQuery = '', setSearchQuery }: ShopProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [skip, setSkip] = useState(0);
+  const [total, setTotal] = useState(0);
 
+  const limit = 20;
+
+  // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
-      setLoading(true);
+      if (skip === 0) setLoading(true);
+      else setLoadingMore(true);
+
       try {
+        let url = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
+        
         if (searchQuery.trim()) {
-          const res = await fetch(`https://dummyjson.com/products/search?q=${searchQuery}`);
-          const data = await res.json();
-          setProducts(data.products.slice(0, 8));
-        } else {
-          // Fetch default products (mocking the aesthetic items)
-          const [watches, shoes, sunglasses] = await Promise.all([
-            fetch('https://dummyjson.com/products/category/mens-watches?limit=3').then(res => res.json()),
-            fetch('https://dummyjson.com/products/category/mens-shoes?limit=2').then(res => res.json()),
-            fetch('https://dummyjson.com/products/category/sunglasses?limit=3').then(res => res.json())
-          ]);
-          setProducts([...watches.products, ...shoes.products, ...sunglasses.products]);
+          url = `https://dummyjson.com/products/search?q=${searchQuery}&limit=${limit}&skip=${skip}`;
+        } else if (activeCategory !== 'all') {
+          url = `https://dummyjson.com/products/category/${activeCategory}?limit=${limit}&skip=${skip}`;
         }
+
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        if (skip === 0) {
+          setProducts(data.products);
+        } else {
+          setProducts(prev => [...prev, ...data.products]);
+        }
+        setTotal(data.total);
       } catch (error) {
         console.error("Failed to fetch products:", error);
       } finally {
         setLoading(false);
+        setLoadingMore(false);
       }
     };
 
     fetchProducts();
-  }, [searchQuery]);
+  }, [searchQuery, activeCategory, skip]);
+
+  // Reset skip when search or category changes
+  useEffect(() => {
+    setSkip(0);
+  }, [searchQuery, activeCategory]);
+
+  const handleCategoryClick = (categoryId: string) => {
+    setSearchQuery(''); // Clear search when switching category
+    setActiveCategory(categoryId);
+  };
+
+  const handleLoadMore = () => {
+    if (!loading && !loadingMore && products.length < total) {
+      setSkip(prev => prev + limit);
+    }
+  };
 
   return (
     <div className="px-6 lg:px-12 py-8 w-full max-w-7xl mx-auto flex flex-col gap-8 lg:gap-12">
@@ -86,13 +117,12 @@ export default function Shop({ searchQuery = '' }: ShopProps) {
               {CATEGORIES.map((cat) => (
                 <li key={cat.id}>
                   <button 
-                    onClick={() => setActiveCategory(cat.id)}
+                    onClick={() => handleCategoryClick(cat.id)}
                     className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-4
-                      ${activeCategory === cat.id ? 'bg-mono-bg shadow-neo-inset-sm text-mono-text' : 'text-mono-muted hover:text-mono-text'}
+                      ${(activeCategory === cat.id && !searchQuery) ? 'bg-mono-bg shadow-neo-inset-sm text-mono-text' : 'text-mono-muted hover:text-mono-text'}
                     `}
                   >
-                    {/* Placeholder for actual icons based on cat.icon, using simple circles for now to match aesthetic */}
-                    <div className={`w-6 h-6 rounded-md flex items-center justify-center ${activeCategory === cat.id ? 'shadow-neo-sm' : 'shadow-none'}`}>
+                    <div className={`w-6 h-6 rounded-md flex items-center justify-center ${(activeCategory === cat.id && !searchQuery) ? 'shadow-neo-sm' : 'shadow-none'}`}>
                        <div className="w-2 h-2 rounded-full bg-current opacity-70"></div>
                     </div>
                     {cat.label}
@@ -158,17 +188,39 @@ export default function Shop({ searchQuery = '' }: ShopProps) {
               <div className="w-8 h-8 rounded-full border-2 border-mono-muted border-t-mono-text animate-spin"></div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id.toString()}
-                  name={product.title}
-                  price={`₹${(product.price * 83).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`}
-                  rawPrice={product.price * 83}
-                  imageUrl={product.thumbnail}
-                />
-              ))}
+            <div className="flex flex-col items-center w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
+                {products.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    id={product.id.toString()}
+                    name={product.title}
+                    price={`₹${(product.price * 83).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`}
+                    rawPrice={product.price * 83}
+                    imageUrl={product.thumbnail}
+                  />
+                ))}
+              </div>
+              
+              {/* Load More Button / Intersection target */}
+              {products.length < total && (
+                <div className="mt-12 mb-8">
+                  <button 
+                    onClick={handleLoadMore}
+                    disabled={loadingMore}
+                    className="px-8 py-3 rounded-full bg-mono-bg shadow-neo hover:shadow-neo-inset transition-all text-sm font-bold text-mono-text disabled:opacity-50 flex items-center gap-2"
+                  >
+                    {loadingMore ? (
+                      <>
+                        <div className="w-4 h-4 rounded-full border-2 border-mono-muted border-t-mono-text animate-spin"></div>
+                        Loading...
+                      </>
+                    ) : (
+                      'Load More'
+                    )}
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>

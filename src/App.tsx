@@ -29,7 +29,7 @@ function App() {
               <FeaturedProducts searchQuery={searchQuery} />
             </>
           )}
-          {currentPage === 'shop' && <Shop searchQuery={searchQuery} />}
+          {currentPage === 'shop' && <Shop searchQuery={searchQuery} setSearchQuery={setSearchQuery} />}
           {currentPage === 'cart' && <Cart />}
           {currentPage === 'about' && <About />}
         </main>
