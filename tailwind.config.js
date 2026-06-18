@@ -19,13 +19,13 @@ export default {
       },
       boxShadow: {
         // Raised neumorphic state (light from top-left, shadow on bottom-right)
-        'raised': '-6px -6px 14px rgba(255, 255, 255, 0.9), 6px 6px 14px rgba(163, 177, 198, 0.4)',
+        'raised-light': '-6px -6px 14px rgba(255, 255, 255, 0.9), 6px 6px 14px rgba(163, 177, 198, 0.4)',
         // Recessed neumorphic state (inset shadows with matching light source)
-        'recessed': 'inset -6px -6px 14px rgba(255, 255, 255, 0.85), inset 6px 6px 14px rgba(163, 177, 198, 0.4)',
+        'recessed-light': 'inset -6px -6px 14px rgba(255, 255, 255, 0.85), inset 6px 6px 14px rgba(163, 177, 198, 0.4)',
         // Mini key raised (for small tactile keys / buttons)
-        'key-raised': '-3px -3px 8px rgba(255, 255, 255, 0.9), 3px 3px 8px rgba(163, 177, 198, 0.35)',
+        'key-raised-light': '-3px -3px 8px rgba(255, 255, 255, 0.9), 3px 3px 8px rgba(163, 177, 198, 0.35)',
         // Mini key recessed
-        'key-recessed': 'inset -3px -3px 8px rgba(255, 255, 255, 0.85), inset 3px 3px 8px rgba(163, 177, 198, 0.35)',
+        'key-recessed-light': 'inset -3px -3px 8px rgba(255, 255, 255, 0.85), inset 3px 3px 8px rgba(163, 177, 198, 0.35)',
         
         // Dark Mode equivalents
         'raised-dark': '-6px -6px 14px rgba(255, 255, 255, 0.05), 6px 6px 14px rgba(0, 0, 0, 0.5)',

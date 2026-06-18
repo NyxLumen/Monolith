@@ -22,19 +22,19 @@
   /* Dynamic skeuomorphic helper classes using tailwind config definitions */
   
   .shadow-raised {
-    @apply shadow-raised dark:shadow-raised-dark;
+    @apply shadow-raised-light dark:shadow-raised-dark;
   }
   
   .shadow-recessed {
-    @apply shadow-recessed dark:shadow-recessed-dark;
+    @apply shadow-recessed-light dark:shadow-recessed-dark;
   }
   
   .shadow-key-raised {
-    @apply shadow-key-raised dark:shadow-key-raised-dark;
+    @apply shadow-key-raised-light dark:shadow-key-raised-dark;
   }
   
   .shadow-key-recessed {
-    @apply shadow-key-recessed dark:shadow-key-recessed-dark;
+    @apply shadow-key-recessed-light dark:shadow-key-recessed-dark;
   }
 
   /* Transition for physical spring buttons */
