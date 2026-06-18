@@ -119,8 +119,8 @@ export default function Shop({ searchQuery = '', setSearchQuery }: ShopProps) {
                 <li key={cat.id}>
                   <button 
                     onClick={() => handleCategoryClick(cat.id)}
-                    className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold transition-all flex items-center gap-4
-                      ${(activeCategory === cat.id && !searchQuery) ? 'bg-mono-bg shadow-neo-inset-sm text-mono-text' : 'text-mono-muted hover:text-mono-text'}
+                    className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold transition-colors flex items-center gap-4
+                      ${(activeCategory === cat.id && !searchQuery) ? 'text-mono-text underline underline-offset-4' : 'text-mono-muted hover:text-mono-text'}
                     `}
                   >
                     <div className="w-6 h-6 rounded-md flex items-center justify-center">
