@@ -49,8 +49,10 @@ export default function FeaturedProducts() {
           {products.map((product) => (
             <ProductCard
               key={product.id}
+              id={product.id.toString()}
               name={product.title}
               price={`₹${(product.price * 83).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`}
+              rawPrice={product.price * 83}
               imageUrl={product.thumbnail}
             />
           ))}
