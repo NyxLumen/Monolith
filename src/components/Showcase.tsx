@@ -75,8 +75,8 @@ export const Showcase: React.FC<ShowcaseProps> = ({ onSelectProduct }) => {
       
       {/* Skeuomorphic Category Segmented Tabs */}
       <div className="w-full overflow-x-auto pb-3 console-scrollbar">
-        <div className="flex items-center gap-3 p-1.5 rounded-xl shadow-recessed bg-slate-200/80 border border-white/30 min-w-max">
-          <div className="flex items-center gap-1.5 px-3 py-1 font-mono text-[9px] tracking-widest text-slate-500 font-bold border-r border-slate-250 mr-1 select-none">
+        <div className="flex items-center gap-3 p-1.5 rounded-xl shadow-recessed bg-slate-950/10 backdrop-blur-md border border-white/20 min-w-max">
+          <div className="flex items-center gap-1.5 px-3 py-1 font-mono text-[9px] tracking-widest text-slate-600 font-bold border-r border-white/20 mr-1 select-none">
             <Tag className="w-3.5 h-3.5" />
             <span>CATEGORIES:</span>
           </div>
@@ -89,8 +89,8 @@ export const Showcase: React.FC<ShowcaseProps> = ({ onSelectProduct }) => {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`py-2 px-3.5 rounded-lg font-mono text-[10px] tracking-wider transition-spring cursor-pointer select-none ${
                   isActive
-                    ? 'shadow-key-recessed text-slate-900 font-bold bg-slate-300/60 border border-slate-300/20'
-                    : 'shadow-key-raised text-slate-500 hover:text-slate-700 bg-mono-bg border border-white/50'
+                    ? 'shadow-key-recessed text-slate-950 font-bold bg-white/50 border border-white/30'
+                    : 'shadow-key-raised text-slate-600 hover:text-slate-950 bg-white/25 hover:bg-white/60 border border-white/50'
                 }`}
               >
                 {cat.label}

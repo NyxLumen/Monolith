@@ -37,9 +37,9 @@ export const NavigationDock: React.FC<NavigationDockProps> = ({
   ];
 
   return (
-    <nav className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 p-2 rounded-full shadow-raised bg-gradient-to-br from-slate-100 to-slate-200 border border-white/50 transition-spring">
+    <nav className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 p-2 rounded-full shadow-raised glass-panel transition-spring">
       {/* Recessed track container */}
-      <div className="flex items-center gap-3 p-1 rounded-full bg-slate-200/60 shadow-inner">
+      <div className="flex items-center gap-3 p-1 rounded-full bg-slate-950/10 shadow-inner">
         
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -52,8 +52,8 @@ export const NavigationDock: React.FC<NavigationDockProps> = ({
               title={item.tooltip}
               className={`relative w-12 h-12 rounded-full flex flex-col items-center justify-center font-mono transition-spring cursor-pointer select-none ${
                 isActive
-                  ? 'bg-slate-900 text-white shadow-md shadow-slate-900/25 font-bold'
-                  : 'bg-mono-bg border border-white/60 shadow-key-raised text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+                  ? 'bg-slate-900 text-white shadow-md shadow-slate-900/40 font-bold'
+                  : 'bg-white/50 border border-white/70 shadow-key-raised text-slate-600 hover:text-slate-900 hover:bg-white/80'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />

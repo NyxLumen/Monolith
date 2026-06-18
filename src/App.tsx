@@ -31,7 +31,7 @@ function AppContent() {
         <ShaderGradientCanvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
           <ShaderGradientAny
             animate="on"
-            axesHelper="on"
+            axesHelper="off"
             bgColor1="#000000"
             bgColor2="#000000"
             brightness={1.2}

@@ -78,7 +78,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack 
       <div className="flex justify-start">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 py-2 px-4 rounded-xl shadow-key-raised bg-mono-bg border border-white/60 text-xs font-mono font-bold tracking-wider text-slate-600 hover:text-slate-800 transition-spring cursor-pointer select-none active:scale-95"
+          className="flex items-center gap-2 py-2 px-4 rounded-xl shadow-key-raised bg-white/50 hover:bg-white/80 border border-white/70 text-xs font-mono font-bold tracking-wider text-slate-600 hover:text-slate-800 transition-spring cursor-pointer select-none active:scale-95"
         >
           <ChevronLeft className="w-4 h-4" />
           <span>RETURN TO CATALOG</span>
@@ -113,10 +113,10 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack 
         </div>
       ) : product ? (
         /* Split view: Large Image Inspect on left, specifications on right */
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8 rounded-3xl shadow-raised bg-gradient-to-br from-slate-100 to-slate-200/90 border border-white/40">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8 rounded-3xl shadow-raised glass-panel">
           
           {/* Left Column: Image showcase slot */}
-          <div className="relative aspect-square w-full rounded-2xl shadow-recessed bg-gradient-to-br from-slate-200 to-slate-100/50 p-8 flex items-center justify-center border border-slate-300/10 overflow-hidden">
+          <div className="relative aspect-square w-full rounded-2xl shadow-recessed bg-white p-8 flex items-center justify-center border border-slate-200/30 overflow-hidden">
             <img 
               src={product.image} 
               alt={product.title} 
@@ -147,7 +147,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack 
               </div>
 
               {/* Divider milled line */}
-              <div className="h-[1px] w-full bg-slate-200/60 my-2"></div>
+              <div className="h-[1px] w-full bg-white/20 my-2"></div>
 
               {/* Description Body */}
               <div className="flex flex-col gap-1.5">
@@ -159,12 +159,12 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack 
             </div>
 
             {/* Price & Checkout parameters */}
-            <div className="flex flex-col gap-4 p-4 rounded-2xl shadow-recessed bg-slate-200/80 border border-slate-300/20">
+            <div className="flex flex-col gap-4 p-4 rounded-2xl shadow-recessed bg-slate-950/10 border border-white/10">
               <div className="flex justify-between items-center">
                 <span className="font-mono text-[9px] font-bold tracking-wider text-slate-500 select-none">UNIT PRICE</span>
                 
                 {/* Monospace Price Readout */}
-                <div className="px-3.5 py-1.5 rounded-lg shadow-recessed bg-slate-100 font-mono text-sm font-bold text-slate-800 border border-white/40">
+                <div className="px-3.5 py-1.5 rounded-lg shadow-recessed bg-white/50 font-mono text-sm font-bold text-slate-900 border border-white/70">
                   ${product.price.toFixed(2)}
                 </div>
               </div>
@@ -180,24 +180,24 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack 
                     <span>ADD TO SHOPPING LEDGER</span>
                   </button>
                 ) : (
-                  <div className="flex items-center justify-between gap-4 p-1 rounded-xl shadow-recessed bg-slate-100 border border-white/40">
+                  <div className="flex items-center justify-between gap-4 p-1 rounded-xl shadow-recessed bg-white/40 border border-white/50">
                     <button
                       onClick={() => updateQuantity(product.id, quantity - 1)}
-                      className="w-10 h-10 rounded-lg flex items-center justify-center shadow-key-raised bg-mono-bg text-slate-600 hover:text-slate-800 border border-white/60 transition-spring cursor-pointer active:scale-95"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center shadow-key-raised bg-white/60 text-slate-700 hover:text-slate-900 border border-white/75 transition-spring cursor-pointer active:scale-95"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
                     
                     <div className="flex flex-col items-center">
-                      <span className="text-[7px] font-mono text-slate-400 font-bold select-none uppercase">QUANTITY</span>
-                      <span className="font-mono text-sm font-bold text-slate-800 select-none mt-0.5">
+                      <span className="text-[7px] font-mono text-slate-500 font-bold select-none uppercase">QUANTITY</span>
+                      <span className="font-mono text-sm font-bold text-slate-900 select-none mt-0.5">
                         {quantity}
                       </span>
                     </div>
                     
                     <button
                       onClick={() => updateQuantity(product.id, quantity + 1)}
-                      className="w-10 h-10 rounded-lg flex items-center justify-center shadow-key-raised bg-mono-bg text-slate-600 hover:text-slate-800 border border-white/60 transition-spring cursor-pointer active:scale-95"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center shadow-key-raised bg-white/60 text-slate-700 hover:text-slate-900 border border-white/75 transition-spring cursor-pointer active:scale-95"
                     >
                       <Plus className="w-4 h-4" />
                     </button>
