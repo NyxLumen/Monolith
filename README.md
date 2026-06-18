@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Monolith
 
-Currently, two official plugins are available:
+### Timeless Essentials. Elevated.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+_A modern exploration of Neumorphic design patterns in eCommerce._
 
-## React Compiler
+<br />
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+![Hero Showcase](./screenshots/hero.png)
 
-## Expanding the ESLint configuration
+<br />
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](#)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](#)
+[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](#)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+</div>
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🎨 The Philosophy: My Take on Neumorphism
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Monolith** is a conceptual eCommerce storefront born from a desire to reimagine **Neumorphism** (Soft UI). Often criticized for accessibility issues or feeling overly plastic, this project attempts to ground the aesthetic into something highly usable, premium, and tactile.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+By relying on a tightly controlled monochromatic palette (`#F4F4F6` base), carefully calibrated lighting angles, and subtle interactive states, the UI feels less like a website and more like a physical, machined object.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Key Design Tenets
+
+- **Physicality**: Elements extrude from or indent into the background, creating a unified material surface.
+- **Restraint**: Zero harsh borders. Depth is achieved exclusively through highlight and shadow manipulation.
+- **Fluidity**: Transitions are butter-smooth, using custom spring-like bezier curves for that satisfying "snap" when interacting with elements.
+- **Micro-Interactions**: From the custom inset scrollbars to the floating "Add to Cart" pills, every interaction is designed to feel delightfully tactile.
+
+<br />
+
+<div align="center">
+  <img src="./screenshots/about.png" alt="About Section Showcase" />
+</div>
+
+<br />
+
+## 🛠️ The Architecture
+
+While visually soft, the underlying architecture is robust and dynamic:
+
+- **Live Data Pipeline**: The shop is fully integrated with the [DummyJSON API](https://dummyjson.com/), featuring dynamic category fetching, real-time live search routing, and seamless infinite-scroll pagination.
+- **State Management**: Zero complex boilerplate. A lightweight, bespoke Context API manages the global shopping cart state across the application.
+- **Responsive Mastery**: The layout fluidly adapts from a multi-column desktop grid to a highly optimized mobile experience, including an app-like bottom navigation pill for touch devices.
+
+---
+
+<div align="center">
+  <i>"Design is not just what it looks like and feels like. Design is how it works."</i>
+</div>
