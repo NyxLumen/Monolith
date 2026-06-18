@@ -10,6 +10,7 @@ import { SystemDashboard } from './components/SystemDashboard';
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 
 // Cast to any to bypass strict type declarations of the third-party WebGL component
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ShaderGradientAny = ShaderGradient as any;
 
 function AppContent() {
@@ -30,17 +31,17 @@ function AppContent() {
         <ShaderGradientCanvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
           <ShaderGradientAny
             animate="on"
-            axesHelper="off"
+            axesHelper="on"
             bgColor1="#000000"
             bgColor2="#000000"
             brightness={1.2}
-            cAzimuthAngle={181}
-            cDistance={4.58}
-            cPolarAngle={83}
+            cAzimuthAngle={180}
+            cDistance={2.4}
+            cPolarAngle={95}
             cameraZoom={1}
-            color1="#ebedff"
-            color2="#f3f2f8"
-            color3="#dbf8ff"
+            color1="#ff6a1a"
+            color2="#c73c00"
+            color3="#FD4912"
             destination="onCanvas"
             embedMode="off"
             envPreset="city"
@@ -52,7 +53,7 @@ function AppContent() {
             lightType="3d"
             pixelDensity={1}
             positionX={0}
-            positionY={1.8}
+            positionY={-2.1}
             positionZ={0}
             range="disabled"
             rangeEnd={40}
@@ -60,13 +61,13 @@ function AppContent() {
             reflection={0.1}
             rotationX={0}
             rotationY={0}
-            rotationZ={-90}
+            rotationZ={225}
             shader="defaults"
             type="waterPlane"
             uAmplitude={0}
-            uDensity={1}
+            uDensity={1.8}
             uFrequency={5.5}
-            uSpeed={0.3}
+            uSpeed={0.2}
             uStrength={3}
             uTime={0.2}
             wireframe={false}
