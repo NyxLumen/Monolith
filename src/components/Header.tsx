@@ -27,9 +27,17 @@ export default function Header({ currentPage, setCurrentPage, searchQuery, setSe
           className="flex flex-col cursor-pointer"
           onClick={() => setCurrentPage('home')}
         >
-          <h1 className="text-3xl font-heading font-medium tracking-widest text-mono-text">
-            monolith
-          </h1>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-mono-text text-mono-bg flex items-center justify-center shadow-neo-sm">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 20V5a1 1 0 0 1 1-1h4a1 1 0 0 1 .8.4L12 8l2.2-3.6a1 1 0 0 1 .8-.4h4a1 1 0 0 1 1 1v15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 20v-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <h1 className="text-3xl font-heading font-medium tracking-widest text-mono-text">
+              monolith
+            </h1>
+          </div>
           <span className="text-[0.6rem] font-bold tracking-[0.3em] text-mono-muted uppercase mt-1">
             Timeless Essentials
           </span>
