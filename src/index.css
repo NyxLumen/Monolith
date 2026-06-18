@@ -8,10 +8,6 @@
   body {
     @apply bg-mono-bg text-slate-800 font-body transition-colors duration-300;
   }
-  
-  body.dark {
-    @apply bg-mono-bgdark text-slate-100;
-  }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-medium tracking-tight;
@@ -22,19 +18,19 @@
   /* Dynamic skeuomorphic helper classes using tailwind config definitions */
   
   .shadow-raised {
-    @apply shadow-raised-light dark:shadow-raised-dark;
+    @apply shadow-raised-light;
   }
   
   .shadow-recessed {
-    @apply shadow-recessed-light dark:shadow-recessed-dark;
+    @apply shadow-recessed-light;
   }
   
   .shadow-key-raised {
-    @apply shadow-key-raised-light dark:shadow-key-raised-dark;
+    @apply shadow-key-raised-light;
   }
   
   .shadow-key-recessed {
-    @apply shadow-key-recessed-light dark:shadow-key-recessed-dark;
+    @apply shadow-key-recessed-light;
   }
 
   /* Transition for physical spring buttons */
@@ -47,11 +43,6 @@
     mix-blend-mode: multiply;
     filter: contrast(1.05) saturate(0.95);
   }
-  
-  .dark .blend-multiply-desaturate {
-    mix-blend-mode: screen;
-    filter: contrast(1.1) brightness(0.9) saturate(0.9);
-  }
 
   /* Recessed scrollbar track like a console groove */
   .console-scrollbar::-webkit-scrollbar {
@@ -60,14 +51,14 @@
   }
   
   .console-scrollbar::-webkit-scrollbar-track {
-    @apply bg-slate-300/50 dark:bg-slate-900/50 rounded-full shadow-inner;
+    @apply bg-slate-300/50 rounded-full shadow-inner;
   }
   
   .console-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-slate-400 dark:bg-slate-700 rounded-full border-2 border-transparent bg-clip-padding;
+    @apply bg-slate-400 rounded-full border-2 border-transparent bg-clip-padding;
   }
   
   .console-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-500 dark:bg-slate-600;
+    @apply bg-slate-500;
   }
 }

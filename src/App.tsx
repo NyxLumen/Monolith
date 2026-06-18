@@ -1,45 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Header } from './components/Header';
 import type { ViewType } from './types';
 import { NavigationDock } from './components/NavigationDock';
 
 function App() {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
   const [currentView, setCurrentView] = useState<ViewType>('showcase');
   const [activeProductId, setActiveProductId] = useState<number | null>(null);
   const [btnState, setBtnState] = useState<boolean>(false);
   const [cartCount, setCartCount] = useState<number>(3);
 
-  // Synchronize Dark Mode Class on the document element
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (darkMode) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   return (
-    <div className="min-h-screen p-4 md:p-8 flex flex-col items-center bg-mono-bg dark:bg-mono-bgdark text-slate-800 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen p-4 md:p-8 flex flex-col items-center bg-mono-bg text-slate-800 transition-colors duration-300">
       
       {/* Skeuomorphic Header Section */}
-      <Header 
-        currentView={currentView} 
-        darkMode={darkMode} 
-        setDarkMode={setDarkMode} 
-      />
+      <Header />
 
       {/* Main Console Viewport */}
       <main className="w-full max-w-5xl flex-grow flex flex-col justify-center items-center">
         
         {/* Temporary layout contents to show view switching state */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-6 rounded-2xl shadow-recessed dark:shadow-recessed-dark bg-slate-200/50 dark:bg-slate-900/30">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-6 rounded-2xl shadow-recessed bg-slate-200/50">
           
-          <section className="p-6 rounded-xl shadow-raised dark:shadow-raised-dark bg-mono-bg dark:bg-mono-bgdark flex flex-col gap-4">
-            <h2 className="text-xl text-slate-800 dark:text-slate-100">Elevated Console Module</h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-body">
-              Active view state is tracked by the parent controller. Use the navigation dock (coming in Checkpoint 4) to toggle views.
+          <section className="p-6 rounded-xl shadow-raised bg-mono-bg flex flex-col gap-4">
+            <h2 className="text-xl text-slate-800 font-light tracking-wide">Tactile Module</h2>
+            <p className="text-sm text-slate-600 leading-relaxed font-body">
+              This panel demonstrates skeuomorphic elevation physics. Click the button to toggle shadow states and increment the cart indicator.
             </p>
             
             <button
@@ -47,20 +32,20 @@ function App() {
                 setBtnState(!btnState);
                 setCartCount((c) => c + 1);
               }}
-              className={`mt-4 py-3 px-6 rounded-lg text-sm font-semibold transition-spring ${
+              className={`mt-4 py-3 px-6 rounded-lg text-xs font-mono tracking-widest transition-spring ${
                 btnState 
-                  ? 'shadow-key-recessed dark:shadow-key-recessed-dark text-emerald-600 dark:text-emerald-400 font-mono' 
-                  : 'shadow-key-raised dark:shadow-key-raised-dark text-slate-700 dark:text-slate-300 font-mono'
+                  ? 'shadow-key-recessed text-slate-900' 
+                  : 'shadow-key-raised text-slate-600'
               }`}
             >
-              {btnState ? 'STATE: DEPRESSED (CART+1)' : 'STATE: ELEVATED (CLICK ME TO ADD)'}
+              {btnState ? 'DEPRESSED' : 'ELEVATED'}
             </button>
           </section>
 
-          <section className="p-6 rounded-xl shadow-recessed dark:shadow-recessed-dark bg-mono-bg dark:bg-mono-bgdark flex flex-col gap-4">
-            <h2 className="text-xl text-slate-800 dark:text-slate-100">Quick View Switch Demo</h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-body">
-              Directly toggle the views below (Active Product ID: {activeProductId !== null ? activeProductId : 'NONE'}):
+          <section className="p-6 rounded-xl shadow-recessed bg-mono-bg flex flex-col gap-4">
+            <h2 className="text-xl text-slate-800 font-light tracking-wide">Viewport Controls</h2>
+            <p className="text-sm text-slate-600 leading-relaxed font-body">
+              Select an interface section from the controller below, or manually trigger views here (Selected Detail: {activeProductId !== null ? `#${activeProductId}` : 'NONE'}):
             </p>
             
             <div className="grid grid-cols-2 gap-3 mt-2">
@@ -77,8 +62,8 @@ function App() {
                   }}
                   className={`py-2 px-3 rounded-lg text-xs font-mono transition-spring uppercase tracking-wider ${
                     currentView === v
-                      ? 'shadow-key-recessed dark:shadow-key-recessed-dark text-emerald-600 dark:text-emerald-400 font-bold'
-                      : 'shadow-key-raised dark:shadow-key-raised-dark text-slate-700 dark:text-slate-300'
+                      ? 'shadow-key-recessed text-slate-950 font-bold'
+                      : 'shadow-key-raised text-slate-500'
                   }`}
                 >
                   {v}
@@ -95,12 +80,11 @@ function App() {
       <NavigationDock 
         currentView={currentView}
         setCurrentView={setCurrentView}
-        activeProductId={activeProductId}
         cartCount={cartCount}
       />
 
-      <footer className="mt-8 mb-24 font-mono text-[10px] text-slate-400 dark:text-slate-500 tracking-wider">
-        PHYSICAL INTERFACE PHYSICS V1.0 // SOLID MILL SHEET DESIGN
+      <footer className="mt-8 mb-24 font-mono text-[9px] text-slate-400 tracking-[0.2em] uppercase">
+        MONOLITH // PREMIUM TACTILE HARDWARE
       </footer>
     </div>
   );
