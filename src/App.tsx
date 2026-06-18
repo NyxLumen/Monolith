@@ -5,6 +5,7 @@ import { NavigationDock } from './components/NavigationDock';
 import { CartProvider, useCart } from './context/CartContext';
 import { Showcase } from './components/Showcase';
 import { ProductDetail } from './components/ProductDetail';
+import { Cart } from './components/Cart';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('showcase');
@@ -40,15 +41,7 @@ function AppContent() {
         )}
 
         {currentView === 'cart' && (
-          <div className="w-full p-8 rounded-2xl shadow-recessed bg-slate-200/50 flex flex-col items-center justify-center min-h-[30rem] gap-4">
-            <h2 className="text-xl font-light tracking-wide text-slate-800">SHOPPING CART LEDGER</h2>
-            <p className="text-sm font-mono text-slate-500">
-              Total items in ledger: {cartCount}
-            </p>
-            <p className="text-xs text-slate-500 max-w-md text-center leading-relaxed font-body">
-              Tactile shopping ledger and checkout sliders are coming in Checkpoint 7.
-            </p>
-          </div>
+          <Cart onReturnToShop={() => setCurrentView('showcase')} />
         )}
 
         {currentView === 'system' && (
