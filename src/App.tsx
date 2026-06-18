@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import type { ViewType } from './types';
+import { NavigationDock } from './components/NavigationDock';
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
   const [currentView, setCurrentView] = useState<ViewType>('showcase');
   const [activeProductId, setActiveProductId] = useState<number | null>(null);
   const [btnState, setBtnState] = useState<boolean>(false);
+  const [cartCount, setCartCount] = useState<number>(3);
 
   // Synchronize Dark Mode Class on the document element
   useEffect(() => {
@@ -41,14 +43,17 @@ function App() {
             </p>
             
             <button
-              onClick={() => setBtnState(!btnState)}
+              onClick={() => {
+                setBtnState(!btnState);
+                setCartCount((c) => c + 1);
+              }}
               className={`mt-4 py-3 px-6 rounded-lg text-sm font-semibold transition-spring ${
                 btnState 
                   ? 'shadow-key-recessed dark:shadow-key-recessed-dark text-emerald-600 dark:text-emerald-400 font-mono' 
                   : 'shadow-key-raised dark:shadow-key-raised-dark text-slate-700 dark:text-slate-300 font-mono'
               }`}
             >
-              {btnState ? 'STATE: DEPRESSED' : 'STATE: ELEVATED (CLICK ME)'}
+              {btnState ? 'STATE: DEPRESSED (CART+1)' : 'STATE: ELEVATED (CLICK ME TO ADD)'}
             </button>
           </section>
 
@@ -86,7 +91,15 @@ function App() {
 
       </main>
 
-      <footer className="mt-8 font-mono text-[10px] text-slate-400 dark:text-slate-500 tracking-wider">
+      {/* Floating Skeuomorphic Navigation Dock */}
+      <NavigationDock 
+        currentView={currentView}
+        setCurrentView={setCurrentView}
+        activeProductId={activeProductId}
+        cartCount={cartCount}
+      />
+
+      <footer className="mt-8 mb-24 font-mono text-[10px] text-slate-400 dark:text-slate-500 tracking-wider">
         PHYSICAL INTERFACE PHYSICS V1.0 // SOLID MILL SHEET DESIGN
       </footer>
     </div>
