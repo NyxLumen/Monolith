@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import type { Product } from '../types';
 import { useCart } from '../context/CartContext';
 import { ChevronLeft, Plus, Minus, ShoppingBag, Loader2 } from 'lucide-react';
@@ -10,13 +10,23 @@ interface ProductDetailProps {
 
 export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack }) => {
   const { cart, addToCart, updateQuantity } = useCart();
+  const [prevProductId, setPrevProductId] = useState<number>(productId);
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchProductDetails = async () => {
+  if (productId !== prevProductId) {
+    setPrevProductId(productId);
+    setProduct(null);
     setLoading(true);
     setError(null);
+  }
+
+  const fetchProductDetails = useCallback(async (isRetry = false) => {
+    if (isRetry) {
+      setLoading(true);
+      setError(null);
+    }
     try {
       const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
       if (!response.ok) {
@@ -29,10 +39,33 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack 
     } finally {
       setLoading(false);
     }
-  };
+  }, [productId]);
 
   useEffect(() => {
-    fetchProductDetails();
+    let active = true;
+    const loadData = async () => {
+      try {
+        const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
+        if (!response.ok) {
+          throw new Error('Could not pull product records');
+        }
+        const data = await response.json();
+        if (active) {
+          setProduct(data);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (active) {
+          setError(err instanceof Error ? err.message : 'Unknown communication error');
+          setLoading(false);
+        }
+      }
+    };
+
+    loadData();
+    return () => {
+      active = false;
+    };
   }, [productId]);
 
   const cartItem = product ? cart.find((item) => item.product.id === product.id) : null;
@@ -72,7 +105,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ productId, onBack 
             <p className="font-mono text-xs text-slate-500 max-w-md">{error}</p>
           </div>
           <button
-            onClick={fetchProductDetails}
+            onClick={() => fetchProductDetails(true)}
             className="py-3 px-6 rounded-lg text-xs font-mono font-bold tracking-wider text-slate-700 hover:text-slate-900 shadow-key-raised active:shadow-key-recessed bg-white cursor-pointer transition-spring"
           >
             RETRY STREAM

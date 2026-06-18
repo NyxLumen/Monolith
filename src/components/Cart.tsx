@@ -10,6 +10,7 @@ export const Cart: React.FC<CartProps> = ({ onReturnToShop }) => {
   const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } = useCart();
   const [sliderVal, setSliderVal] = useState<number>(0);
   const [checkoutComplete, setCheckoutComplete] = useState<boolean>(false);
+  const [orderRef, setOrderRef] = useState<number | null>(null);
 
   const shipping = cartTotal > 150 ? 0 : 9.99;
   const tax = cartTotal * 0.08;
@@ -20,6 +21,7 @@ export const Cart: React.FC<CartProps> = ({ onReturnToShop }) => {
     setSliderVal(val);
     if (val >= 98) {
       setSliderVal(100);
+      setOrderRef(Math.floor(100000 + Math.random() * 900000));
       setCheckoutComplete(true);
       clearCart();
     }
@@ -39,7 +41,7 @@ export const Cart: React.FC<CartProps> = ({ onReturnToShop }) => {
         <div className="flex flex-col gap-2">
           <h2 className="font-heading text-xl font-bold text-slate-900 tracking-tight">TRANSACTION AUTHORIZED</h2>
           <p className="font-mono text-xs text-slate-500 uppercase tracking-widest">
-            Order Ref: #MONO-{Math.floor(100000 + Math.random() * 900000)}
+            Order Ref: #MONO-{orderRef}
           </p>
           <p className="text-sm text-slate-600 max-w-sm mt-2 font-body leading-relaxed">
             Your payment signal has been processed. Sculptural products are being packed for physical delivery.

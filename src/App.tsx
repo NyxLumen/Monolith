@@ -6,6 +6,7 @@ import { CartProvider, useCart } from './context/CartContext';
 import { Showcase } from './components/Showcase';
 import { ProductDetail } from './components/ProductDetail';
 import { Cart } from './components/Cart';
+import { SystemDashboard } from './components/SystemDashboard';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<ViewType>('showcase');
@@ -45,12 +46,7 @@ function AppContent() {
         )}
 
         {currentView === 'system' && (
-          <div className="w-full p-8 rounded-2xl shadow-recessed bg-slate-200/50 flex flex-col items-center justify-center min-h-[30rem] gap-4">
-            <h2 className="text-xl font-light tracking-wide text-slate-800">SYSTEM ADJUSTMENT BOARD</h2>
-            <p className="text-xs text-slate-500 max-w-md text-center leading-relaxed font-body">
-              Physical shadow controls, latency adjustment dials, and system stats are coming in Checkpoint 8.
-            </p>
-          </div>
+          <SystemDashboard />
         )}
 
       </main>

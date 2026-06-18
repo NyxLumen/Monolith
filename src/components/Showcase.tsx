@@ -21,9 +21,11 @@ export const Showcase: React.FC<ShowcaseProps> = ({ onSelectProduct }) => {
     { id: "women's clothing", label: 'WOMEN CLOTHING' },
   ];
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    setError(null);
+  const fetchProducts = async (isRetry = false) => {
+    if (isRetry) {
+      setLoading(true);
+      setError(null);
+    }
     try {
       const response = await fetch('https://fakestoreapi.com/products');
       if (!response.ok) {
@@ -39,7 +41,29 @@ export const Showcase: React.FC<ShowcaseProps> = ({ onSelectProduct }) => {
   };
 
   useEffect(() => {
-    fetchProducts();
+    let active = true;
+    const load = async () => {
+      try {
+        const response = await fetch('https://fakestoreapi.com/products');
+        if (!response.ok) {
+          throw new Error('Signal response was not successful');
+        }
+        const data = await response.json();
+        if (active) {
+          setProducts(data);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (active) {
+          setError(err instanceof Error ? err.message : 'Unknown communication error');
+          setLoading(false);
+        }
+      }
+    };
+    load();
+    return () => {
+      active = false;
+    };
   }, []);
 
   const filteredProducts = activeCategory === 'all'
@@ -98,7 +122,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({ onSelectProduct }) => {
             </p>
           </div>
           <button
-            onClick={fetchProducts}
+            onClick={() => fetchProducts(true)}
             className="py-3 px-6 rounded-lg text-xs font-mono font-bold tracking-wider text-slate-700 hover:text-slate-900 shadow-key-raised active:shadow-key-recessed bg-mono-bg cursor-pointer transition-spring"
           >
             RETRY STREAM CONNECTION
