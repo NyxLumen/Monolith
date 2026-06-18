@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./public/favicon.svg" width="75" height="75" alt="Monolith Logo" style="margin-bottom: 20px" />
+
 # Monolith
 
 ### Timeless Essentials. Elevated.
