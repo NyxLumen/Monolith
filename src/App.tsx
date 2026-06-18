@@ -4,10 +4,11 @@ import Hero from './components/Hero';
 import FeaturedProducts from './components/FeaturedProducts';
 import Cart from './components/Cart';
 import About from './components/About';
+import Shop from './components/Shop';
 import { useCart } from './context/CartContext';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'cart' | 'about'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'cart' | 'about' | 'shop'>('home');
   const [searchQuery, setSearchQuery] = useState('');
   const { cartItems } = useCart();
 
@@ -28,6 +29,7 @@ function App() {
               <FeaturedProducts searchQuery={searchQuery} />
             </>
           )}
+          {currentPage === 'shop' && <Shop searchQuery={searchQuery} />}
           {currentPage === 'cart' && <Cart />}
           {currentPage === 'about' && <About />}
         </main>
@@ -51,20 +53,14 @@ function App() {
             {currentPage === 'home' && <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
           </button>
           <button 
-            onClick={() => setCurrentPage('cart')}
-            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-full transition-all text-[0.65rem] font-bold relative ${currentPage === 'cart' ? 'bg-mono-bg shadow-neo-inset text-mono-text' : 'hover:bg-mono-bg hover:shadow-neo-inset text-mono-muted font-medium'}`}
+            onClick={() => setCurrentPage('shop')}
+            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-full transition-all text-[0.65rem] font-bold relative ${currentPage === 'shop' ? 'bg-mono-bg shadow-neo-inset text-mono-text' : 'hover:bg-mono-bg hover:shadow-neo-inset text-mono-muted font-medium'}`}
           >
             <span className="w-5 h-5 flex items-center justify-center relative">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-              {/* Cart Badge Mobile */}
-              {cartItems.length > 0 && (
-                <span className="absolute -top-1 -right-2 w-4 h-4 bg-black text-white rounded-full flex items-center justify-center text-[0.5rem] font-bold">
-                  {cartItems.length}
-                </span>
-              )}
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/><path d="M15 21V9"/></svg>
             </span>
-            Cart
-            {currentPage === 'cart' && <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
+            Shop
+            {currentPage === 'shop' && <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
           </button>
           <button 
             onClick={() => setCurrentPage('about')}

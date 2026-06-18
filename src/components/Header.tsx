@@ -2,8 +2,8 @@ import { Search, ShoppingCart, Menu } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 interface HeaderProps {
-  currentPage: 'home' | 'cart' | 'about';
-  setCurrentPage: (page: 'home' | 'cart' | 'about') => void;
+  currentPage: 'home' | 'cart' | 'about' | 'shop';
+  setCurrentPage: (page: 'home' | 'cart' | 'about' | 'shop') => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 }
@@ -45,11 +45,11 @@ export default function Header({ currentPage, setCurrentPage, searchQuery, setSe
           {currentPage === 'home' && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
         </button>
         <button 
-          onClick={() => setCurrentPage('cart')} 
+          onClick={() => setCurrentPage('shop')} 
           className="text-sm font-bold text-mono-text hover:text-mono-muted transition-colors relative"
         >
           Shop
-          {currentPage === 'cart' && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
+          {currentPage === 'shop' && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mono-text"></div>}
         </button>
         <button 
           onClick={() => setCurrentPage('about')} 
