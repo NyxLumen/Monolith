@@ -18,10 +18,10 @@
   /* Dynamic skeuomorphic helper classes using tailwind config definitions */
   
   .shadow-raised {
-    --nm-shadow-distance: 4px;
-    --nm-shadow-blur: 10px;
-    --nm-shadow-color: rgba(15, 23, 42, 0.12);
-    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.45);
+    --nm-shadow-distance: 8px;
+    --nm-shadow-blur: 20px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.35);
+    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.95);
     --nm-shadow-light-source: 315deg;
 
     --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
@@ -33,10 +33,10 @@
   }
   
   .shadow-recessed {
-    --nm-shadow-distance: 4px;
-    --nm-shadow-blur: 10px;
-    --nm-shadow-color: rgba(15, 23, 42, 0.12);
-    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.4);
+    --nm-shadow-distance: 6px;
+    --nm-shadow-blur: 16px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.3);
+    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.9);
     --nm-shadow-light-source: 315deg;
 
     --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
@@ -48,10 +48,10 @@
   }
   
   .shadow-key-raised {
-    --nm-shadow-distance: 2px;
-    --nm-shadow-blur: 6px;
-    --nm-shadow-color: rgba(15, 23, 42, 0.1);
-    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.5);
+    --nm-shadow-distance: 4px;
+    --nm-shadow-blur: 10px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.25);
+    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.95);
     --nm-shadow-light-source: 315deg;
 
     --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
@@ -63,10 +63,10 @@
   }
   
   .shadow-key-recessed {
-    --nm-shadow-distance: 2px;
-    --nm-shadow-blur: 6px;
-    --nm-shadow-color: rgba(15, 23, 42, 0.1);
-    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.45);
+    --nm-shadow-distance: 4px;
+    --nm-shadow-blur: 10px;
+    --nm-shadow-color: rgba(163, 177, 198, 0.25);
+    --nm-shadow-highlight-color: rgba(255, 255, 255, 0.9);
     --nm-shadow-light-source: 315deg;
 
     --nm-shadow-x: calc(var(--nm-shadow-distance) * calc(sin(var(--nm-shadow-light-source, 315deg)) * -1));
@@ -77,19 +77,15 @@
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--nm-shadow);
   }
 
-  /* Glassmorphism panel helpers */
+  /* Mockup Visual Panel Helpers */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(16px) saturate(110%);
-    -webkit-backdrop-filter: blur(16px) saturate(110%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.7);
   }
 
   .glass-panel-dark {
-    background: rgba(15, 23, 42, 0.18);
-    backdrop-filter: blur(16px) saturate(110%);
-    -webkit-backdrop-filter: blur(16px) saturate(110%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1E293B;
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
 

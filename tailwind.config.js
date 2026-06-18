@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         mono: {
-          bg: '#E2E8F0', // Base light mode skeuomorphic bg (slate-200)
+          bg: '#F4F4F6', // Base premium soft-gray mockup bg
         }
       },
       fontFamily: {

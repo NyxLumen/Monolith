@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ViewType } from '../types';
-import { LayoutGrid, ShoppingBag, Settings } from 'lucide-react';
+import { Home, ShoppingBag, User } from 'lucide-react';
 
 interface NavigationDockProps {
   currentView: ViewType;
@@ -13,62 +13,68 @@ export const NavigationDock: React.FC<NavigationDockProps> = ({
   setCurrentView,
   cartCount,
 }) => {
-  
   const navItems = [
     {
       id: 'showcase' as ViewType,
-      label: 'SHOP',
-      icon: LayoutGrid,
-      tooltip: 'Catalog Grid'
+      label: 'Home',
+      icon: Home,
+      tooltip: 'Catalog Home'
     },
     {
       id: 'cart' as ViewType,
-      label: 'CART',
+      label: 'Cart',
       icon: ShoppingBag,
-      tooltip: 'Checkout Ledger',
+      tooltip: 'Shopping Ledger',
       badge: cartCount
     },
     {
-      id: 'system' as ViewType,
-      label: 'SYSTEM',
-      icon: Settings,
-      tooltip: 'Hardware Parameters'
+      id: 'about' as ViewType,
+      label: 'About',
+      icon: User,
+      tooltip: 'Brand Story'
     }
   ];
 
   return (
-    <nav className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 p-2 rounded-full shadow-raised glass-panel transition-spring">
-      {/* Recessed track container */}
-      <div className="flex items-center gap-3 p-1 rounded-full bg-slate-950/10 shadow-inner">
-        
+    <nav className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 p-2 rounded-full shadow-raised bg-white/90 backdrop-blur-md border border-white/80 w-80 max-w-[95%] transition-spring">
+      <div className="flex items-center justify-around p-0.5 rounded-full">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = currentView === item.id;
+          // Determine if active (handle showcase/detail mapping)
+          const isActive = 
+            currentView === item.id || 
+            (item.id === 'showcase' && currentView === 'detail');
           
           return (
             <button
               key={item.id}
               onClick={() => setCurrentView(item.id)}
               title={item.tooltip}
-              className={`relative w-12 h-12 rounded-full flex flex-col items-center justify-center font-mono transition-spring cursor-pointer select-none ${
+              className={`relative flex flex-col items-center justify-center py-1 px-4 rounded-2xl transition-spring cursor-pointer select-none ${
                 isActive
-                  ? 'bg-slate-900 text-white shadow-md shadow-slate-900/40 font-bold'
-                  : 'bg-white/50 border border-white/70 shadow-key-raised text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  ? 'text-slate-900 font-bold scale-105'
+                  : 'text-slate-400 hover:text-slate-700'
               }`}
             >
-              <Icon className="w-3.5 h-3.5" />
-              <span className="text-[6px] tracking-widest font-extrabold mt-0.5">{item.label}</span>
+              {/* Highlight background circle for active item */}
+              {isActive && (
+                <span className="absolute inset-0 bg-[#F4F4F6] shadow-key-raised rounded-2xl border border-white/70 -z-10 animate-fade-in"></span>
+              )}
 
-              {/* Cart Count Badge */}
+              <Icon className={`w-4 h-4 transition-transform ${isActive ? 'scale-110 text-slate-900' : 'text-slate-400'}`} />
+              <span className="text-[8px] tracking-wider mt-1 select-none uppercase font-semibold">
+                {item.label}
+              </span>
+
+              {/* Badge Counter */}
               {item.badge !== undefined && item.badge > 0 && (
-                <span className="absolute -top-1 -right-1 bg-orange-600 text-white font-mono font-bold text-[8px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-[0_0_6px_#ea580c] animate-badge-scale border border-orange-400">
+                <span className="absolute -top-1 -right-1 bg-slate-950 text-white font-mono font-bold text-[8px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm border border-white">
                   {item.badge}
                 </span>
               )}
             </button>
           );
         })}
-
       </div>
     </nav>
   );

@@ -1,37 +1,93 @@
 import React from 'react';
+import type { ViewType } from '../types';
+import { Menu, Search } from 'lucide-react';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  currentView: ViewType;
+  setCurrentView: (view: ViewType) => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView }) => {
+  const navItems = [
+    { id: 'showcase' as ViewType, label: 'Home' },
+    { id: 'cart' as ViewType, label: 'Cart' },
+    { id: 'about' as ViewType, label: 'About' },
+  ];
+
   return (
-    <header className="w-full max-w-5xl mx-auto mb-8 p-6 rounded-2xl shadow-raised glass-panel flex flex-col sm:flex-row justify-between items-center gap-4 transition-spring">
+    <header className="w-full max-w-5xl mx-auto mb-6 p-4 flex justify-between items-center relative select-none">
       
-      {/* Brand & Precise Specs */}
-      <div className="flex flex-col">
-        <span className="font-heading text-lg font-extrabold tracking-[0.35em] text-slate-900 select-none">
-          MONOLITH
-        </span>
-        <span className="font-mono text-[7px] text-slate-500 tracking-[0.25em] mt-1 select-none uppercase">
-          Tactile E-Commerce Console
-        </span>
+      {/* ================= MOBILE HEADER LAYOUT (Hidden on MD+) ================= */}
+      <div className="flex sm:hidden w-full justify-between items-center">
+        {/* Menu Circular Button */}
+        <button className="w-10 h-10 rounded-full bg-[#F4F4F6] shadow-key-raised border border-white/60 flex items-center justify-center cursor-pointer active:scale-95 transition-spring">
+          <Menu className="w-4 h-4 text-slate-700" />
+        </button>
+
+        {/* Brand Logo & Subtitle */}
+        <div className="flex flex-col items-center">
+          <span 
+            onClick={() => setCurrentView('showcase')}
+            className="font-heading text-2xl font-bold tracking-[0.1em] text-slate-950 cursor-pointer lowercase select-none"
+          >
+            monolith
+          </span>
+          <span className="font-mono text-[6px] text-slate-400 tracking-[0.35em] mt-0.5 select-none uppercase font-semibold">
+            Timeless Essentials
+          </span>
+        </div>
+
+        {/* Search Circular Button */}
+        <button className="w-10 h-10 rounded-full bg-[#F4F4F6] shadow-key-raised border border-white/60 flex items-center justify-center cursor-pointer active:scale-95 transition-spring">
+          <Search className="w-4 h-4 text-slate-700" />
+        </button>
       </div>
 
-      {/* Hardware Printed Details */}
-      <div className="flex items-center gap-6 font-mono text-[8px] text-slate-500 tracking-[0.15em] font-semibold">
-        <div className="flex flex-col items-end">
-          <span className="text-slate-400">DEVICE REF</span>
-          <span className="text-slate-800">MNLH-01</span>
-        </div>
+      {/* ================= DESKTOP HEADER LAYOUT (Hidden on Mobile) ================= */}
+      <div className="hidden sm:flex w-full justify-between items-center">
         
-        {/* Skeuomorphic Rotary Dial (Rotates on hover) */}
-        <div className="flex items-center gap-2">
-          <div className="flex flex-col items-end">
-            <span className="text-slate-400">VOLUME</span>
-            <span className="text-slate-800">7.2</span>
-          </div>
-          <div className="w-6 h-6 rounded-full shadow-key-raised bg-white/60 border border-white/70 flex items-center justify-center cursor-pointer hover:rotate-45 transition-transform duration-300">
-            {/* Dial indicator mark */}
-            <div className="w-[1.5px] h-2 bg-slate-500 -translate-y-1.5 rounded-full"></div>
-          </div>
+        {/* Left: Brand Logo & Subtitle */}
+        <div 
+          onClick={() => setCurrentView('showcase')}
+          className="flex flex-col items-start cursor-pointer"
+        >
+          <span className="font-heading text-2xl font-bold tracking-[0.1em] text-slate-950 lowercase select-none">
+            monolith
+          </span>
+          <span className="font-mono text-[6px] text-slate-400 tracking-[0.35em] mt-0.5 select-none uppercase font-semibold">
+            Timeless Essentials
+          </span>
         </div>
+
+        {/* Center: Recessed Navigation Capsule */}
+        <div className="flex items-center gap-1 p-1 rounded-full bg-[#E5E7EB]/40 shadow-recessed border border-white/20">
+          {navItems.map((item) => {
+            // Map sub-views to determine active states
+            const isActive = 
+              currentView === item.id || 
+              (item.id === 'showcase' && currentView === 'detail');
+            
+            return (
+              <button
+                key={item.id}
+                onClick={() => setCurrentView(item.id)}
+                className={`py-1.5 px-6 rounded-full font-mono text-[10px] tracking-wider transition-spring cursor-pointer select-none font-bold ${
+                  isActive
+                    ? 'shadow-key-raised bg-white text-slate-900 border border-white/80'
+                    : 'text-slate-500 hover:text-slate-800 hover:bg-white/20'
+                }`}
+              >
+                {item.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Right: Search Circular Button */}
+        <button className="w-10 h-10 rounded-full bg-[#F4F4F6] shadow-key-raised border border-white/60 flex items-center justify-center cursor-pointer active:scale-95 transition-spring">
+          <Search className="w-4 h-4 text-slate-700" />
+        </button>
+
       </div>
 
     </header>

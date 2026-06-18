@@ -1,4 +1,4 @@
-export type ViewType = 'showcase' | 'detail' | 'cart' | 'system';
+export type ViewType = 'showcase' | 'detail' | 'cart' | 'system' | 'about';
 
 export interface Product {
   id: number;
